@@ -34,7 +34,7 @@
     "watch": "ساعة",
     "mouse": "فأرة",
     "tablet": "تابلت",
-    "searchPlaceholder": "إبحث في لبيب ستور...",
+    "searchPlaceholder": "إبحث في Timbo..",
     "signIn": "تسجيل الدخول",
     "recentlyViewed": "شوهد مؤخراً",
     "support": "الدعم",
@@ -243,7 +243,8 @@
     "appStore": "متجر التطبيقات",
     "getInOn": "احصل عليه من",
     "googlePlay": "جوجل بلاي",
-    "allRightsReserved": "جميع الحقوق محفوظة لشركة ENS.",
+    "allRightsReserved": "كل لحظة أسهل",
+    "ENSLink":"تم التطوير بواسطة",
     "weAccept": "نحن نقبل:"
   },
   "orderTracking": {

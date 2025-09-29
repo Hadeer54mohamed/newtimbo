@@ -1,13 +1,11 @@
 "use client";
 import React, { useEffect, useState } from "react";
-
 import { useModalContext } from "@/app/context/QuickViewModalContext";
 import { AppDispatch, useAppSelector } from "@/redux/store";
 import { addItemToCart } from "@/redux/features/cart-slice";
 import { useDispatch } from "react-redux";
 import Image from "next/image";
 import { usePreviewSlider } from "@/app/context/PreviewSliderContext";
-import { resetQuickView } from "@/redux/features/quickView-slice";
 import { updateproductDetails } from "@/redux/features/product-details";
 import { useLocale } from "next-intl";
 import { Link } from "@/app/i18n/navigation";
@@ -16,28 +14,21 @@ const QuickViewModal = () => {
   const { isModalOpen, closeModal } = useModalContext();
   const { openPreviewModal } = usePreviewSlider();
   const [quantity, setQuantity] = useState(1);
+  const [expanded, setExpanded] = useState(false);
   const locale = useLocale();
 
   const dispatch = useDispatch<AppDispatch>();
 
-  // get the product data
   const product = useAppSelector((state) => state.quickViewReducer.value);
-
   const [activePreview, setActivePreview] = useState(0);
 
-  // preview modal
   const handlePreviewSlider = () => {
     dispatch(updateproductDetails(product));
-
     openPreviewModal();
   };
 
-  // add to cart
   const handleAddToCart = () => {
-    // Check if product is in stock and quantity doesn't exceed stock
-    if (product.stock_quantity <= 0 || quantity > product.stock_quantity) {
-      return;
-    }
+    if (product.stock_quantity <= 0 || quantity > product.stock_quantity) return;
 
     const cartItem = {
       id: product.id,
@@ -65,7 +56,6 @@ const QuickViewModal = () => {
   };
 
   useEffect(() => {
-    // closing modal while clicking outside
     function handleClickOutside(event: any) {
       if (!event.target.closest(".modal-content")) {
         closeModal();
@@ -79,29 +69,34 @@ const QuickViewModal = () => {
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
       setQuantity(1);
+      setExpanded(false);
     };
   }, [isModalOpen, closeModal]);
 
-  // Reset active preview when product changes
   useEffect(() => {
     setActivePreview(0);
-  }, [product.id]);
+  }, [product?.id]);
 
-  // Don't render if no product data
-  if (!product || !product.id) {
-    return null;
-  }
+  if (!product || !product.id) return null;
 
-  // Get product images
-  const productImages = product.imgs?.thumbnails ||
+  const productImages =
+    product.imgs?.thumbnails ||
     (Array.isArray(product.image_url)
       ? product.image_url
-      : [product.image_url]) || ["/images/products/product-1-bg-1.png"];
+      : [product.image_url]) ||
+    ["/images/products/product-1-bg-1.png"];
 
-  const productPreviews = product.imgs?.previews ||
+  const productPreviews =
+    product.imgs?.previews ||
     (Array.isArray(product.image_url)
       ? product.image_url
-      : [product.image_url]) || ["/images/products/product-1-bg-1.png"];
+      : [product.image_url]) ||
+    ["/images/products/product-1-bg-1.png"];
+
+  const description =
+    locale === "ar"
+      ? product.description_ar ?? ""
+      : product.description_en ?? "";
 
   return (
     <div
@@ -240,13 +235,13 @@ const QuickViewModal = () => {
                       <path
                         d="M10 0.5625C4.78125 0.5625 0.5625 4.78125 0.5625 10C0.5625 15.2188 4.78125 19.4688 10 19.4688C15.2188 19.4688 19.4688 15.2188 19.4688 10C19.4688 4.78125 15.2188 0.5625 10 0.5625ZM10 18.0625C5.5625 18.0625 1.96875 14.4375 1.96875 10C1.96875 5.5625 5.5625 1.96875 10 1.96875C14.4375 1.96875 18.0625 5.59375 18.0625 10.0312C18.0625 14.4375 14.4375 18.0625 10 18.0625Z"
                         fill={
-                          product.stock_quantity > 0 ? "#22AD5C" : "#FF4444"
+                          product.stock_quantity > 0 ? "#B7DE11" : "#FF4444"
                         }
                       />
                       <path
                         d="M12.6875 7.09374L8.9688 10.7187L7.2813 9.06249C7.00005 8.78124 6.56255 8.81249 6.2813 9.06249C6.00005 9.34374 6.0313 9.78124 6.2813 10.0625L8.2813 12C8.4688 12.1875 8.7188 12.2812 8.9688 12.2812C9.2188 12.2812 9.4688 12.1875 9.6563 12L13.6875 8.12499C13.9688 7.84374 13.9688 7.40624 13.6875 7.12499C13.4063 6.84374 12.9688 6.84374 12.6875 7.09374Z"
                         fill={
-                          product.stock_quantity > 0 ? "#22AD5C" : "#FF4444"
+                          product.stock_quantity > 0 ? "#B7DE11" : "#FF4444"
                         }
                       />
                     </g>
@@ -273,14 +268,28 @@ const QuickViewModal = () => {
                 </div>
               </div>
 
+              <div className="mb-4">
               <div
-                dangerouslySetInnerHTML={{
-                  __html:
-                    locale === "ar"
-                      ? product.description_ar ?? ""
-                      : product.description_en ?? "",
-                }}
+                className={`text-dark leading-relaxed ${
+                  expanded ? "" : "line-clamp-2"
+                }`}
+                dangerouslySetInnerHTML={{ __html: description }}
               />
+              {description.length > 100 && (
+                <button
+                  onClick={() => setExpanded(!expanded)}
+                  className="text-blue font-medium mt-2 hover:underline"
+                >
+                  {expanded
+                    ? locale === "ar"
+                      ? "عرض أقل"
+                      : "Show Less"
+                    : locale === "ar"
+                    ? "عرض المزيد"
+                    : "Show More"}
+                </button>
+              )}
+            </div>
 
               <div className="flex flex-wrap justify-between gap-5 mt-6 mb-7.5">
                 <div>

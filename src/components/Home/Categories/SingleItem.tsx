@@ -12,17 +12,19 @@ const SingleItem = ({ item }: { item: Category }) => {
       href={`/${locale}/shop?category=${item.id}`}
       className="group flex flex-col items-center"
     >
-      <div className="max-w-[130px] w-full bg-[#F2F3F8] h-32.5 rounded-full flex items-center justify-center mb-4">
-        <img
-          src={item.image_url}
-          alt="Category"
-          className="w-full h-full object-cover rounded-full"
+      <div className="max-w-[130px] w-full h-[130px] rounded-full bg-[#E8E8E8] flex items-center justify-center mb-4 overflow-hidden relative shadow-md group-hover:shadow-xl transition-all duration-300">
+        <Image
+          src={item.image_url || "/images/placeholder-category.png"}
+          alt={locale === "ar" ? item.name_ar : item.name_en}
+          fill
+          className="object-cover rounded-full group-hover:scale-105 transition-transform duration-500"
         />
       </div>
 
       <div className="flex justify-center">
-        <h3 className="inline-block font-medium text-center text-dark bg-gradient-to-r from-blue to-blue bg-[length:0px_1px] bg-left-bottom bg-no-repeat transition-[background-size] duration-500 hover:bg-[length:100%_3px] group-hover:bg-[length:100%_1px] group-hover:text-blue">
+        <h3 className="inline-block font-medium text-center text-[#231f20] relative transition-colors duration-300 group-hover:text-[#0380C8]">
           {locale === "ar" ? item.name_ar : item.name_en}
+          <span className="absolute left-0 bottom-0 w-0 h-[2px] bg-[#B7DE11] transition-all duration-500 group-hover:w-full"></span>
         </h3>
       </div>
     </Link>

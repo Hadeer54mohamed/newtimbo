@@ -66,21 +66,22 @@ const SingleItem = ({ item }: { item: Product }) => {
           </h3>
 
           <span className="flex items-center justify-center gap-2 font-medium text-lg ">
-            {item.offer_price && item.offer_price > 0 ? (
-              <>
-                <span className="text-red-dark font-semibold">
-                  {`${locale === "ar" ? "جنيه" : "Pound"} ${item.offer_price}`}
-                </span>
-                <span className="text-dark-4 line-through">
-                  {`${locale === "ar" ? "جنيه" : "Pound"} ${item.price}`}
-                </span>
-              </>
-            ) : (
-              <span className="text-red-dark font-semibold">
-                {`${locale === "ar" ? "جنيه" : "Pound"} ${item.price}`}
-              </span>
-            )}
-          </span>
+  {item.offer_price && item.offer_price > 0 ? (
+    <>
+      <span className="text-[#0380C8] font-semibold">
+        {`${locale === "ar" ? "جنيه" : "Pound"} ${item.offer_price}`}
+      </span>
+      <span className="text-dark-4 line-through">
+        {`${locale === "ar" ? "جنيه" : "Pound"} ${item.price}`}
+      </span>
+    </>
+  ) : (
+    <span className="text-[#0380C8] font-semibold">
+      {`${locale === "ar" ? "جنيه" : "Pound"} ${item.price}`}
+    </span>
+  )}
+</span>
+
         </div>
 
         <div className="flex justify-center items-center flex-1 ">

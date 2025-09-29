@@ -10,12 +10,12 @@ const Footer = () => {
   const commonT = useTranslations("common");
 
   return (
-    <footer className="overflow-hidden">
-      <div className="max-w-[1170px] mx-auto px-4 sm:px-8 xl:px-0">
-        {/* <!-- footer menu start --> */}
-        <div className="flex flex-wrap xl:flex-nowrap gap-10 xl:gap-19 xl:justify-between pt-17.5 xl:pt-22.5 pb-10 xl:pb-15">
-          <div className="max-w-[330px] w-full">
-            <h2 className="mb-7.5 text-custom-1 font-medium text-dark">
+    <footer className="bg-[#231f20] text-[#E8E8E8]">
+    <div className="max-w-[1170px] mx-auto px-4 sm:px-8 xl:px-0">
+      {/* footer menu */}
+      <div className="flex flex-wrap xl:flex-nowrap gap-10 xl:gap-19 xl:justify-between pt-17.5 xl:pt-22.5 pb-10 xl:pb-15">
+      <div className="max-w-[330px] w-full">
+            <h2 className="mb-7.5 text-custom-1 font-medium text-[#B7DE11]">
               {t("helpSupport")}
             </h2>
 
@@ -96,7 +96,7 @@ const Footer = () => {
               <a
                 href="#"
                 aria-label="Facebook Social Link"
-                className="flex ease-out duration-200 hover:text-blue"
+                className="flex ease-out duration-200 hover:text-[#B7DE11] text-[#E8E8E8]"
               >
                 <svg
                   className="fill-current"
@@ -121,7 +121,7 @@ const Footer = () => {
               <a
                 href="#"
                 aria-label="Twitter Social Link"
-                className="flex ease-out duration-200 hover:text-blue"
+                className="flex ease-out duration-200 hover:text-[#B7DE11] text-[#E8E8E8]"
               >
                 <svg
                   className="fill-current"
@@ -141,7 +141,7 @@ const Footer = () => {
               <a
                 href="#"
                 aria-label="Instagram Social Link"
-                className="flex ease-out duration-200 hover:text-blue"
+                className="flex ease-out duration-200 hover:text-[#B7DE11] text-[#E8E8E8]"
               >
                 <svg
                   className="fill-current"
@@ -176,7 +176,7 @@ const Footer = () => {
               <a
                 href="#"
                 aria-label="Linkedin Social Link"
-                className="flex ease-out duration-200 hover:text-blue"
+                className="flex ease-out duration-200 hover:text-[#B7DE11] text-[#E8E8E8]"
               >
                 <svg
                   className="fill-current"
@@ -202,40 +202,40 @@ const Footer = () => {
           </div>
 
           <div className="w-full sm:w-auto">
-            <h2 className="mb-7.5 text-custom-1 font-medium text-dark">
+            <h2 className="mb-7.5 text-custom-1 font-medium text-[#B7DE11]">
               {t("account")}
             </h2>
 
             <ul className="flex flex-col gap-3.5">
               <li>
-                <a className="ease-out duration-200 hover:text-blue" href="#">
+                <a className="ease-out duration-200 hover:text-[#B7DE11] text-[#E8E8E8]" href="#">
                   {t("myAccount")}
                 </a>
               </li>
               <li>
-                <a className="ease-out duration-200 hover:text-blue" href="#">
+                <a className="ease-out duration-200 hover:text-[#B7DE11] text-[#E8E8E8]" href="#">
                   {t("loginRegister")}
                 </a>
               </li>
               <li>
-                <a className="ease-out duration-200 hover:text-blue" href="#">
+                <a className="ease-out duration-200 hover:text-[#B7DE11] text-[#E8E8E8]" href="#">
                   {t("cart")}
                 </a>
               </li>
               <li>
-                <a className="ease-out duration-200 hover:text-blue" href="#">
+                <a className="ease-out duration-200 hover:text-[#B7DE11] text-[#E8E8E8]" href="#">
                   {t("wishlist")}
                 </a>
               </li>
               <li>
-                <a className="ease-out duration-200 hover:text-blue" href="#">
+                <a className="ease-out duration-200 hover:text-[#B7DE11] text-[#E8E8E8]" href="#">
                   {t("shop")}
                 </a>
               </li>
               <li>
                 <Link
                   href={`/${locale}/track-order`}
-                  className="ease-out duration-200 hover:text-blue"
+                  className="ease-out duration-200 hover:text-[#B7DE11] text-[#E8E8E8]"
                 >
                   {commonT("trackOrder")}
                 </Link>
@@ -244,33 +244,33 @@ const Footer = () => {
           </div>
 
           <div className="w-full sm:w-auto">
-            <h2 className="mb-7.5 text-custom-1 font-medium text-dark">
+            <h2 className="mb-7.5 text-custom-1 font-medium text-[#B7DE11]">
               {t("quickLink")}
             </h2>
 
             <ul className="flex flex-col gap-3">
               <li>
-                <a className="ease-out duration-200 hover:text-blue" href="#">
+                <a className="ease-out duration-200 hover:text-[#B7DE11] text-[#E8E8E8]" href="#">
                   {t("privacyPolicy")}
                 </a>
               </li>
               <li>
-                <a className="ease-out duration-200 hover:text-blue" href="#">
+                <a className="ease-out duration-200 hover:text-[#B7DE11] text-[#E8E8E8]" href="#">
                   {t("refundPolicy")}
                 </a>
               </li>
               <li>
-                <a className="ease-out duration-200 hover:text-blue" href="#">
+                <a className="ease-out duration-200 hover:text-[#B7DE11] text-[#E8E8E8]" href="#">
                   {t("termsOfUse")}
                 </a>
               </li>
               <li>
-                <a className="ease-out duration-200 hover:text-blue" href="#">
+                <a className="ease-out duration-200 hover:text-[#B7DE11] text-[#E8E8E8]" href="#">
                   {t("faqs")}
                 </a>
               </li>
               <li>
-                <a className="ease-out duration-200 hover:text-blue" href="#">
+                <a className="ease-out duration-200 hover:text-[#B7DE11] text-[#E8E8E8]" href="#">
                   {t("contact")}
                 </a>
               </li>
@@ -278,18 +278,18 @@ const Footer = () => {
           </div>
 
           <div className="w-full sm:w-auto">
-            <h2 className="mb-7.5 text-custom-1 font-medium text-dark lg:text-right">
+            <h2 className="mb-7.5 text-custom-1 font-medium text-[#B7DE11] lg:text-right">
               {t("downloadApp")}
             </h2>
 
-            <p className="lg:text-right text-custom-sm mb-4">
+          {/*   <p className="lg:text-right text-custom-sm mb-4">
               {t("saveWithApp")}
-            </p>
+            </p> */}
 
             <ul className="flex flex-col lg:items-end gap-3">
               <li>
                 <a
-                  className="inline-flex items-center gap-3 py-[9px] pl-4 pr-7.5 text-white rounded-md bg-dark ease-out duration-200 hover:bg-opacity-95"
+                  className="inline-flex items-center gap-3 py-[9px] pl-4 pr-7.5 text-white rounded-md bg-[#231f20] ease-out duration-200 hover:bg-opacity-95"
                   href="#"
                 >
                   <svg
@@ -317,7 +317,7 @@ const Footer = () => {
 
               <li>
                 <a
-                  className="inline-flex items-center gap-3 py-[9px] pl-4 pr-8.5 text-white rounded-md bg-blue ease-out duration-200 hover:bg-opacity-95"
+                  className="inline-flex items-center gap-3 py-[9px] pl-4 pr-8.5 text-white rounded-md bg-[#0380C8] ease-out duration-200 hover:bg-opacity-95"
                   href="#"
                 >
                   <svg
@@ -350,62 +350,77 @@ const Footer = () => {
       </div>
 
       {/* <!-- footer bottom start --> */}
-      <div className="py-5 xl:py-7.5 bg-gray-1">
-        <div className="max-w-[1170px] mx-auto px-4 sm:px-8 xl:px-0">
-          <div className="flex gap-5 flex-wrap items-center justify-between">
-            <p className="text-dark font-medium">
-              &copy; {year}. {t("allRightsReserved")}
-            </p>
+      <div className="py-5 xl:py-7.5 bg-[#231f20]">
+  <div className="max-w-[1170px] mx-auto px-4 sm:px-8 xl:px-0">
+    <div className="flex gap-5 flex-wrap items-center justify-between">
+      
+      {/* الجزء الخاص بالحقوق */}
+      <div className="bg-[#0380C8] py-4 px-6 rounded-lg text-center text-sm text-[#E8E8E8]">
+      <p className="text-base md:text-lg text-[#E8E8E8]">
+  © {year}. كل لحظة أسهل - تم التطوير بواسطة{" "}
+  <a
+    href="https://www.facebook.com/ENSEGYPTEG"
+    target="_blank"
+    rel="noopener noreferrer"
+    className="text-[#B7DE11] font-semibold hover:underline transition"
+  >
+    ENS
+  </a>
+</p>
 
-            <div className="flex flex-wrap items-center gap-4">
-              <p className="font-medium">{t("weAccept")}</p>
+      </div>
 
-              <div className="flex flex-wrap items-center gap-6">
-                <a href="#" aria-label="payment system with visa card">
-                  <Image
-                    src="/images/payment/payment-01.svg"
-                    alt="visa card"
-                    width={66}
-                    height={22}
-                  />
-                </a>
-                <a href="#" aria-label="payment system with paypal">
-                  <Image
-                    src="/images/payment/payment-02.svg"
-                    alt="paypal"
-                    width={18}
-                    height={21}
-                  />
-                </a>
-                <a href="#" aria-label="payment system with master card">
-                  <Image
-                    src="/images/payment/payment-03.svg"
-                    alt="master card"
-                    width={33}
-                    height={24}
-                  />
-                </a>
-                <a href="#" aria-label="payment system with apple pay">
-                  <Image
-                    src="/images/payment/payment-04.svg"
-                    alt="apple pay"
-                    width={52.94}
-                    height={22}
-                  />
-                </a>
-                <a href="#" aria-label="payment system with google pay">
-                  <Image
-                    src="/images/payment/payment-05.svg"
-                    alt="google pay"
-                    width={56}
-                    height={22}
-                  />
-                </a>
-              </div>
-            </div>
-          </div>
+      {/* طرق الدفع */}
+      <div className="flex flex-wrap items-center gap-4">
+        <p className="font-medium text-[#E8E8E8]">{t("weAccept")}</p>
+
+        <div className="flex flex-wrap items-center gap-6">
+          <a href="#" aria-label="payment system with visa card">
+            <Image
+              src="/images/payment/payment-01.svg"
+              alt="visa card"
+              width={66}
+              height={22}
+            />
+          </a>
+          <a href="#" aria-label="payment system with paypal">
+            <Image
+              src="/images/payment/payment-02.svg"
+              alt="paypal"
+              width={18}
+              height={21}
+            />
+          </a>
+          <a href="#" aria-label="payment system with master card">
+            <Image
+              src="/images/payment/payment-03.svg"
+              alt="master card"
+              width={33}
+              height={24}
+            />
+          </a>
+          <a href="#" aria-label="payment system with apple pay">
+            <Image
+              src="/images/payment/payment-04.svg"
+              alt="apple pay"
+              width={52.94}
+              height={22}
+            />
+          </a>
+          <a href="#" aria-label="payment system with google pay">
+            <Image
+              src="/images/payment/payment-05.svg"
+              alt="google pay"
+              width={56}
+              height={22}
+            />
+          </a>
         </div>
       </div>
+    </div>
+  </div>
+</div>
+
       {/* <!-- footer bottom end --> */}
     </footer>
   );

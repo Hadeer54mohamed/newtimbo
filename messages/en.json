@@ -34,7 +34,7 @@
     "watch": "Watch",
     "mouse": "Mouse",
     "tablet": "Tablet",
-    "searchPlaceholder": "Search in Lapip Store...",
+    "searchPlaceholder": "Search in Timbo...",
     "signIn": "Sign In",
     "recentlyViewed": "Recently Viewed",
     "support": "Support",
@@ -243,7 +243,8 @@
     "appStore": "App Store",
     "getInOn": "Get in On",
     "googlePlay": "Google Play",
-    "allRightsReserved": "All rights reserved by ENS.",
+    "allRightsReserved": "Every Moment Easier",
+    "ENSLink":"Developed by",
     "weAccept": "We Accept:"
   },
   "orderTracking": {

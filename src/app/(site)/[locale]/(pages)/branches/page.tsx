@@ -11,11 +11,10 @@ export async function generateMetadata({
   const t = await getTranslations({ locale, namespace: "branches" });
 
   return {
-    title: locale === "ar" ? `الفروع | متجر لابيب` : `Branches | Lapep Store`,
+    title: locale === "ar" ? `الفروع | Timbo | Every Moment Easier ` : `Branches | Timbo | Every Moment Easier`,
     description:
       locale === "ar"
-        ? "اكتشف فروع متجر لابيب في جميع أنحاء المملكة - مواقعنا وعناويننا وأوقات العمل"
-        : "Discover Lapep Store branches across the kingdom - our locations, addresses, and working hours",
+      ? `الفروع | Timbo | Every Moment Easier ` : `Branches | Timbo | Every Moment Easier`,
   };
 }
 

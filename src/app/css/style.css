@@ -15,7 +15,7 @@
   body.rtl {
     direction: rtl;
     text-align: right;
-    font-family: Cairo;
+    font-family: var(--font-comfortaa), Comfortaa, sans-serif;
   }
   .videoz {
     max-width: 1180px;
@@ -284,5 +284,6 @@ input[type="search"]::-webkit-search-results-decoration {
 
 .force-font,
 * {
-  font-family: Cairo;
+  font-family: var(--font-comfortaa), Comfortaa, sans-serif;
 }
+

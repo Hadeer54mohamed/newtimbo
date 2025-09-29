@@ -35,7 +35,7 @@ export function formatWhatsAppMessage(orderDetails: OrderDetails): string {
     )
     .join("\n");
 
-  let message = `🛒 *طلب جديد من متجر لابيب*
+  let message = `🛒 *طلب جديد من Timbo | Every Moment Easier *
 
 📋 *تفاصيل الطلب:*
 رقم الطلب: ${orderDetails.orderId}
@@ -64,7 +64,7 @@ ${orderDetails.orderNotes}`;
 📞 *يرجى التواصل مع العميل لتأكيد الطلب*
 
 ---
-🏪 *نظام طلبات متجر لابيب*`;
+🏪 *نظام طلبات Timbo | Every Moment Easier *`;
 
   return message;
 }

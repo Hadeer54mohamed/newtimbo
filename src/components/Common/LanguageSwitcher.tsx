@@ -55,7 +55,7 @@ const LanguageSwitcher = () => {
     <div className="relative" ref={dropdownRef}>
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center gap-2 font-medium text-custom-sm text-dark hover:text-blue transition-colors duration-200"
+        className="flex items-center gap-2 font-medium text-sm text-[#FFFFFF] hover:text-[#B7DE11] transition-colors duration-200"
       >
         <span>{getLanguageLabel(currentLocale)}</span>
         <svg
@@ -76,14 +76,16 @@ const LanguageSwitcher = () => {
       </button>
 
       {isOpen && (
-        <div className="absolute top-full right-0 mt-2 bg-white border border-gray-3 rounded-md shadow-lg z-50 min-w-[120px] language-switcher-dropdown">
+        <div className="absolute top-full right-0 mt-2 bg-[#E8E8E8] border border-[#0380C8] rounded-md shadow-lg z-50 min-w-[140px]">
           <div className="py-1">
             {routing.locales.map((locale) => (
               <button
                 key={locale}
                 onClick={() => handleLanguageChange(locale)}
-                className={`w-full text-left px-4 py-2 text-sm hover:bg-gray-1 transition-colors duration-200 ${
-                  currentLocale === locale ? "bg-blue text-white" : "text-dark"
+                className={`w-full text-left px-4 py-2 text-sm transition-colors duration-200 ${
+                  currentLocale === locale
+                    ? "bg-[#0380C8] text-white"
+                    : "text-[#231f20] hover:bg-[#B7DE11] hover:text-[#231f20]"
                 }`}
               >
                 {getLanguageLabel(locale)}

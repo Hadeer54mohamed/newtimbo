@@ -4,16 +4,16 @@ import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { routing } from "@/app/i18n/routing";
 import { notFound } from "next/navigation";
 import ClientLayout from "@/app/(site)/[locale]/ClientLayout";
-import { Providers } from "@/app/context/QueryProvider";
+import { comfortaa } from "@/app/fonts"; // 👈 نفس الاسم
 
 export default async function RootLayout({
   children,
   params,
 }: {
   children: React.ReactNode;
-  params: Promise<{ locale: string }>;
+  params: { locale: string };
 }) {
-  const { locale } = await params;
+  const { locale } = params;
   if (!hasLocale(routing.locales, locale)) {
     notFound();
   }
@@ -25,20 +25,18 @@ export default async function RootLayout({
     notFound();
   }
 
-  return (
-    <html
-      lang={locale}
-      suppressHydrationWarning={true}
-      dir={locale === "ar" ? "rtl" : "ltr"}
-    ><link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+  const isRTL = locale === "ar";
+  const dir = isRTL ? "rtl" : "ltr";
+  const bodyClass = isRTL ? "rtl" : "ltr";
 
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200..1000&display=swap" rel="stylesheet" />
-      <body className={locale === "ar" ? "rtl" : "ltr"}>
+  return (
+    <html lang={locale} dir={dir} suppressHydrationWarning>
+      <body
+        className={`${comfortaa.variable} font-comfortaa ${bodyClass}`}
+        suppressHydrationWarning
+      >
         <NextIntlClientProvider locale={locale} messages={messages}>
-          <Providers>
-            <ClientLayout>{children}</ClientLayout>
-          </Providers>
+          <ClientLayout>{children}</ClientLayout>
         </NextIntlClientProvider>
       </body>
     </html>

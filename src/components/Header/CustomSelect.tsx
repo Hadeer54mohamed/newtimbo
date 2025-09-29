@@ -15,14 +15,13 @@ const CustomSelect = ({
   const locale = useLocale();
 
   const toggleDropdown = () => {
-    setIsOpen(!isOpen);
+    setIsOpen((prev) => !prev);
   };
 
   const handleOptionClick = (option: any) => {
     setSelectedOption(option);
-    toggleDropdown();
+    setIsOpen(false);
 
-    // Navigate to shop page with category filter
     if (option.value !== "0") {
       router.push(`/${locale}/shop?category=${option.value}`);
     } else {
@@ -30,7 +29,6 @@ const CustomSelect = ({
     }
   };
 
-  // Update selected option when options change
   useEffect(() => {
     if (options && options.length > 0) {
       setSelectedOption(options[0]);
@@ -38,48 +36,59 @@ const CustomSelect = ({
   }, [options]);
 
   useEffect(() => {
-    // closing modal while clicking outside
-    function handleClickOutside(event: any) {
-      if (!event.target.closest(".dropdown-content")) {
-        toggleDropdown();
+    const handleClickOutside = (event: any) => {
+      if (!event.target.closest(".custom-dropdown")) {
+        setIsOpen(false);
       }
-    }
+    };
 
     if (isOpen) {
       document.addEventListener("mousedown", handleClickOutside);
     }
-
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
-  }, []);
+  }, [isOpen]);
 
   return (
-    <div
-      className="dropdown-content custom-select relative hidden lg:block"
-      style={{ width: "200px" }}
-    >
+    <div className="custom-dropdown relative hidden lg:block w-[200px]">
+      {/* Selected */}
       <div
-        className={`select-selected whitespace-nowrap ${
-          isOpen ? "select-arrow-active" : ""
+        className={`flex items-center justify-between bg-transparent px-4 py-3 text-[13px] font-medium text-[#231f20] cursor-pointer transition-colors border-r border-[#0380C8] ${
+          isOpen ? "text-[#0380C8]" : ""
         } ${isLoading ? "opacity-50 cursor-not-allowed" : ""}`}
         onClick={isLoading ? undefined : toggleDropdown}
       >
-        {isLoading ? "جاري التحميل..." : selectedOption.label}
+        <span className="truncate">
+          {isLoading ? "جاري التحميل..." : selectedOption?.label}
+        </span>
+        <span
+          className={`ml-2 transition-transform text-[#0380C8] ${
+            isOpen ? "rotate-180" : "rotate-0"
+          }`}
+        >
+          ▼
+        </span>
       </div>
-      <div className={`select-items ${isOpen ? "" : "select-hide"}`}>
-        {options?.slice(1, -1).map((option, index) => (
-          <div
-            key={index}
-            onClick={() => handleOptionClick(option)}
-            className={`select-item ${
-              selectedOption === option ? "same-as-selected" : ""
-            }`}
-          >
-            {option.label}
-          </div>
-        ))}
-      </div>
+
+      {/* Options */}
+      {isOpen && (
+        <div className="absolute left-0 right-0 mt-1 rounded-lg border border-[#0380C8] bg-white shadow-lg z-50 overflow-hidden">
+          {options?.map((option, index) => (
+            <div
+              key={index}
+              onClick={() => handleOptionClick(option)}
+              className={`px-4 py-3 text-[13px] cursor-pointer transition-colors font-medium ${
+                selectedOption?.value === option.value
+                  ? "bg-[#0380C8] text-white"
+                  : "hover:bg-[#B7DE11] hover:text-[#231f20]"
+              }`}
+            >
+              {option.label}
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 };

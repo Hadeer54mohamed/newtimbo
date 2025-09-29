@@ -2,9 +2,8 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination } from "swiper/modules";
 
-// Import Swiper styles
-import "swiper/css/pagination";
 import "swiper/css";
+import "swiper/css/pagination";
 
 import Image from "next/image";
 import { Link } from "@/app/i18n/navigation";
@@ -14,113 +13,170 @@ import { useQuery } from "@tanstack/react-query";
 
 const HeroCarousal = () => {
   const locale = useLocale();
-  const {
-    data: limitedTimeProducts,
-    isLoading,
-    error,
-  } = useQuery({
+  const { data: limitedTimeProducts } = useQuery({
     queryKey: ["limitedTimeOfferProducts"],
     queryFn: getLimitedTimeOfferProducts,
   });
 
-  const productsToShow = limitedTimeProducts?.slice(0, 2) || [];
+  const fallbackProducts = [
+    {
+      id: 1,
+      name_en: "True Wireless Noise Cancelling Headphone",
+      name_ar: "سماعات لاسلكية مع إلغاء الضوضاء",
+      offer_price: 299,
+      price: 399,
+      image_url: "/images/hero/hero-01.png",
+    },
+    {
+      id: 2,
+      name_en: "iPhone 14 Plus & 14 Pro Max",
+      name_ar: "آيفون 14 بلس و 14 برو ماكس",
+      offer_price: 699,
+      price: 999,
+      image_url: "/images/hero/hero-02.png",
+    },
+  ];
+
+  const productsToShow =
+    limitedTimeProducts && limitedTimeProducts.length > 0
+      ? limitedTimeProducts.slice(0, 2)
+      : fallbackProducts;
 
   return (
     <Swiper
       spaceBetween={30}
       centeredSlides={true}
-      // autoplay={{
-      //   delay: 2500,
-      //   disableOnInteraction: false,
-      // }}
+      autoplay={{
+        delay: 2500,
+        disableOnInteraction: false,
+      }}
       pagination={{
         clickable: true,
+        renderBullet: (index, className) =>
+          `<span class="${className} hero-dot"></span>`,
       }}
-      modules={[Pagination]}
+      modules={[Autoplay, Pagination]}
       className="hero-carousel"
     >
-      {productsToShow.map((product, index) => (
+      {productsToShow.map((product) => (
         <SwiperSlide key={product.id}>
-          <div className="flex items-center justify-between pt-6 sm:pt-0 flex-col-reverse sm:flex-row bg-gradient-to-r from-[#fff] to-[#f4f1f1] ">
-            <div
-              className={`max-w-[394px] flex flex-col items-center justify-center md:block  ${
-                locale === "en"
-                  ? "pl-4 sm:pl-7.5 lg:pl-12.5"
-                  : "pr-4 sm:pr-7.5 lg:pr-12.5"
-              }`}
-            >
-              {product.offer_price !== null &&
-                product.offer_price !== undefined &&
-                product.offer_price > 0 &&
-                product.price > product.offer_price && (
-                  <div className="flex items-center gap-4 mb-7.5 sm:mb-10">
-                    <span className="block font-semibold text-heading-3 sm:text-heading-1 text-red">
-                      {Math.round(
-                        ((product.price - product.offer_price) /
-                          product.price) *
-                          100
-                      )}
-                      %
+          <div className="relative group">
+            {/* Main Card */}
+            <div className="relative flex flex-col-reverse sm:flex-row items-center bg-white rounded-3xl shadow-xl overflow-hidden border border-[#E8E8E8]/50 transition-all duration-700 hover:shadow-2xl hover:scale-[1.02]">
+              {/* Content Section */}
+              <div
+                className={`relative z-10 max-w-[394px] py-12 sm:py-16 lg:py-20 ${
+                  locale === "en"
+                    ? "pl-6 sm:pl-10 lg:pl-14"
+                    : "pr-6 sm:pr-10 lg:pr-14"
+                }`}
+              >
+                {/* Badge */}
+                <div className="flex items-center gap-4 mb-8 sm:mb-10">
+                  <span className="block font-bold text-xl sm:text-2xl text-[#231f20] bg-[#cfff00] rounded-full px-5 py-2 shadow-md">
+                    {product.offer_price && product.price > product.offer_price
+                      ? Math.round(
+                          ((product.price - product.offer_price) /
+                            product.price) *
+                            100
+                        )
+                      : 30}
+                    %
+                  </span>
+
+                  <div className="flex flex-col">
+                    <span className="block text-[#0380C8] font-semibold text-lg sm:text-xl leading-tight">
+                      {locale === "en" ? "Flash Sale" : "عرض خاص"}
                     </span>
-                    <span className="block text-dark text-sm sm:text-custom-1 sm:leading-[24px]">
-                      {locale === "en" ? "Sale" : "تخفيض"}
-                      <br />
-                      {locale === "en" ? "Off" : "محدود"}
+                    <span className="block text-[#231f20] text-sm sm:text-base opacity-70">
+                      {locale === "en" ? "Limited Time" : "لفترة محدودة"}
                     </span>
                   </div>
-                )}
+                </div>
 
-              <h1 className="font-semibold text-dark text-xl sm:text-3xl mb-3 sm:text-center mt-2">
-                <Link href={`/shop-details?id=${product.id}`}>
-                  {locale === "en" ? product.name_en : product.name_ar}
-                </Link>
-              </h1>
+                {/* Product Title */}
+                <h1 className="text-[#231f20] text-2xl sm:text-3xl lg:text-4xl mb-4 leading-tight transition-colors duration-300">
+                  <Link
+                    href={`/shop-details?id=${product.id}`}
+                    className="hover:text-[#0380C8] transition-colors duration-300"
+                  >
+                    {locale === "en" ? product.name_en : product.name_ar}
+                  </Link>
+                </h1>
 
-              <p>
-                {locale === "en"
-                  ? "Limited time offer - Don't miss this amazing deal!"
-                  : "عرض محدود - لا تفوت هذه الفرصة المذهلة!"}
-              </p>
-
-              <div className="flex items-center gap-3 mb-4">
-                <span className="font-medium text-heading-5 text-red">
-                  {product.offer_price !== null &&
-                  product.offer_price !== undefined &&
-                  product.offer_price > 0
-                    ? product.offer_price
-                    : product.price}{" "}
-                  {locale === "ar" ? "جنية" : "Pound"}
-                </span>
-                {product.offer_price !== null &&
-                  product.offer_price !== undefined &&
-                  product.offer_price > 0 &&
-                  product.price > product.offer_price && (
-                    <span className="font-medium text-2xl text-dark-4 line-through">
-                      {product.price} {locale === "ar" ? "جنية" : "Pound"}
+                {/* Price Section */}
+                <div className="flex items-center gap-4 mb-8">
+                  <div className="flex flex-col">
+                    <span className="text-xs text-gray-500 uppercase tracking-wider">
+                      {locale === "en" ? "Special Price" : "السعر الخاص"}
                     </span>
-                  )}
+                    <span className="font-bold text-[#0380C8] text-2xl sm:text-3xl">
+                      EG{product.offer_price || product.price}
+                    </span>
+                  </div>
+
+                  {product.offer_price &&
+                    product.price > product.offer_price && (
+                      <>
+                        <div className="flex flex-col">
+                          <span className="text-xs text-gray-500 uppercase tracking-wider">
+                            {locale === "en" ? "Was" : "كان"}
+                          </span>
+                          <span className="font-medium text-[#231f20]/50 line-through text-lg sm:text-xl">
+                            EG{product.price}
+                          </span>
+                        </div>
+
+                        <div className="ml-auto">
+                          <span className="block bg-[#0380C8] text-white text-xs font-semibold px-3 py-1 rounded-full text-center">
+                            {locale === "en" ? "Save EG " : "وفر EG "}
+                            {product.price - product.offer_price}
+                          </span>
+                        </div>
+                      </>
+                    )}
+                </div>
+                {/* CTA Button */}
+                <div className="absolute bottom-6 left-6 right-6 sm:static sm:mt-12">
+                  <Link
+                    href={`/shop-details?id=${product.id}`}
+                    className="inline-flex items-center justify-center font-semibold text-white text-lg rounded-2xl bg-[#0380C8] py-3 px-8 transition-all duration-300 hover:bg-[#231f20] hover:scale-105 hover:shadow-lg w-full sm:w-auto"
+                  >
+                    <span className="mr-2">
+                      {locale === "en" ? "Shop Now" : "تسوق الآن"}
+                    </span>
+                    <svg
+                      className="w-5 h-5"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M17 8l4 4m0 0l-4 4m4-4H3"
+                      />
+                    </svg>
+                  </Link>
+                </div>
               </div>
 
-              <Link
-                href={`/shop-details?id=${product.id}`}
-                className="inline-flex font-medium text-white text-custom-sm rounded-md bg-green-dark py-3 px-9 ease-out duration-200 hover:bg-green mt-10 mb-10"
-              >
-                {locale === "en" ? "Shop Now" : "تسوق الآن"}
-              </Link>
-            </div>
-
-            <div>
-              <Image
-                src={
-                  Array.isArray(product.image_url)
-                    ? product.image_url[0]
-                    : product.image_url
-                }
-                alt={locale === "en" ? product.name_en : product.name_ar}
-                width={351}
-                height={358}
-                className="object-cover rounded-[30px]"
-              />
+              {/* Image Section */}
+              <div className="relative flex-shrink-0">
+                <Image
+                  src={
+                    Array.isArray(product.image_url)
+                      ? product.image_url[0]
+                      : product.image_url
+                  }
+                  alt={locale === "en" ? product.name_en : product.name_ar}
+                  width={400}
+                  height={450}
+                  className="object-contain w-full h-auto transition-transform duration-700 group-hover:scale-105"
+                  style={{ maxHeight: "450px" }}
+                />
+              </div>
             </div>
           </div>
         </SwiperSlide>

@@ -13,12 +13,12 @@ export async function generateMetadata({
   return {
     title:
       locale === "ar"
-        ? `صفحة الاتصال | متجر لابيب`
-        : `Contact Page | Lapep Store`,
+        ? `صفحة الاتصال Timbo | Every Moment Easier`
+        : `Contact Page Timbo | Every Moment Easier`,
     description:
       locale === "ar"
-        ? "صفحة الاتصال لمتجر لابيب - تواصل معنا للحصول على المساعدة والدعم"
-        : "Contact page for Lapep Store - Get in touch with us for help and support",
+      ? `صفحة الاتصال Timbo | Every Moment Easier`
+      : `Contact Page Timbo | Every Moment Easier`,
   };
 }
 

@@ -306,8 +306,8 @@ const ShopWithoutSidebar = () => {
               ? "العروض المحدودة"
               : "Limited Offers"
             : locale === "ar"
-            ? "المتجر بدون جانب"
-            : "shop without sidebar",
+            ? "المنتجات "
+            : "Products  ",
         ]}
       />
       <section className="overflow-hidden relative pb-20 pt-5 lg:pt-20 xl:pt-28 bg-[#f3f4f6]">

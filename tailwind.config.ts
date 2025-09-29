@@ -12,6 +12,7 @@ const config: Config = {
   theme: {
     fontFamily: {
       "euclid-circular-a": ["Euclid Circular A"],
+      comfortaa: ["var(--font-comfortaa)", "sans-serif"], 
     },
     container: {
       center: true,
@@ -51,8 +52,8 @@ const config: Config = {
         7: "#374151",
       },
       blue: {
-        DEFAULT: "#22AD5C",
-        dark: "#1A8245",
+        DEFAULT: "#ACD400",
+        dark: "#0380C8  ",
         light: "#2CD673",
         "light-2": "#57DE8F",
         "light-3": "#82E6AC",
@@ -70,8 +71,8 @@ const config: Config = {
         "light-6": "#FEF3F3",
       },
       green: {
-        DEFAULT: "#22AD5C",
-        dark: "#1A8245",
+        DEFAULT: "#ACD400",
+        dark: "#0380C8  ",
         light: "#2CD673",
         "light-2": "#57DE8F",
         "light-3": "#82E6AC",
@@ -104,6 +105,17 @@ const config: Config = {
       ...defaultTheme.screens,
     },
     extend: {
+      colors: {
+        brand: {
+          blue: "#0380C8",   // الأزرق الرئيسي
+          dark: "#231f20",   // الأسود/الرمادي الغامق
+          light: "#E8E8E8",  // الرمادي الفاتح
+          lime: "#B7DE11",   // الأخضر الليموني
+        },
+      },
+      backgroundImage: {
+        "brand-gradient": "linear-gradient(90deg, #0380C8 0%, #B7DE11 100%)",
+      },
       animation: {
         shimmer: "shimmer 1.5s infinite",
         "fade-in": "fadeIn 0.3s ease-in-out",

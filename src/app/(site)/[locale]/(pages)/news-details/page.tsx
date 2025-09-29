@@ -11,8 +11,8 @@ export async function generateMetadata({
   return {
     title:
       locale === "ar"
-        ? "تفاصيل الخبر | متجر لابيب"
-        : "News Details | Lapep Store",
+        ? "تفاصيل الخبر Timbo | Every Moment Easier"
+        : "News Details Timbo | Every Moment Easier",
     description:
       locale === "ar"
         ? "اقرأ تفاصيل الخبر كاملة"

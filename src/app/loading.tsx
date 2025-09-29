@@ -13,8 +13,8 @@ export default function Loading() {
         <div className="mb-8 flex justify-center">
           <div className="relative">
             <Image
-              src="/images/logo/logo.svg"
-              alt="NextCommerce Logo"
+              src="/images/logo/timboL.png"
+              alt="Timbo Logo"
               width={171}
               height={36}
               priority
