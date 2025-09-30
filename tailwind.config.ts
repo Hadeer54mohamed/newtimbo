@@ -110,11 +110,11 @@ const config: Config = {
           blue: "#0380C8",   // الأزرق الرئيسي
           dark: "#231f20",   // الأسود/الرمادي الغامق
           light: "#E8E8E8",  // الرمادي الفاتح
-          lime: "#B7DE11",   // الأخضر الليموني
+          lime: "#cfff00",   // الأخضر الليموني
         },
       },
       backgroundImage: {
-        "brand-gradient": "linear-gradient(90deg, #0380C8 0%, #B7DE11 100%)",
+        "brand-gradient": "linear-gradient(90deg, #0380C8 0%, #cfff00 100%)",
       },
       animation: {
         shimmer: "shimmer 1.5s infinite",

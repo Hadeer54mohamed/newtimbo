@@ -53,47 +53,50 @@ const PromoBanner = () => {
 
         {/* Banner الرئيسي */}
         <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, ease: "easeOut" }}
-          viewport={{ once: false, amount: 0.3 }}
-          className="relative flex flex-col md:flex-row items-center gap-8 rounded-3xl bg-[#0380C8] text-white p-10 shadow-xl overflow-hidden"
-        >
-          {/* Text */}
-          <div className={`flex-1 ${isRTL ? "text-right" : "text-left"}`}>
-            <h2 className="text-3xl lg:text-4xl font-bold mb-4 leading-snug">
-              {isRTL ? "عرض مميز لفترة محدودة" : "Exclusive Limited-Time Offer"}
-            </h2>
-            <p className="text-lg opacity-90 max-w-md">
-              {isRTL
-                ? "أفضل المنتجات بتخفيضات قوية، اغتنم الفرصة الآن."
-                : "Grab the hottest deals on top products. Don’t miss out!"}
-            </p>
-            <Link
-              href={`/${currentLocale}/shop`}
-              className="inline-flex font-semibold text-lg text-[#231f20] bg-[#B7DE11] py-3 px-8 rounded-xl mt-6 transition-all hover:bg-white hover:text-[#0380C8] hover:scale-105"
-            >
-              {isRTL ? "شراء الآن" : "Shop Now"}
-            </Link>
-          </div>
+  initial={{ opacity: 0, y: 40 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  transition={{ duration: 0.7, ease: "easeOut" }}
+  viewport={{ once: false, amount: 0.3 }}
+  className="relative flex flex-col md:flex-row items-center gap-6 rounded-2xl bg-[#0380C8] text-white p-6 sm:p-8 shadow-lg overflow-hidden"
+>
+  {/* Text */}
+  <div className={`flex-1 ${isRTL ? "text-right" : "text-left"}`}>
+    <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold mb-3 leading-snug">
+      {isRTL ? "عرض مميز لفترة محدودة" : "Exclusive Limited-Time Offer"}
+    </h2>
+    <p className="text-sm sm:text-base opacity-90 max-w-sm">
+      {isRTL
+        ? "أفضل المنتجات بتخفيضات قوية، اغتنم الفرصة الآن."
+        : "Grab the hottest deals on top products. Don’t miss out!"}
+    </p>
+    <Link
+      href={`/${currentLocale}/shop`}
+      className="inline-flex font-semibold text-sm sm:text-base text-[#231f20] bg-[#B7DE11] py-2 px-5 sm:py-2.5 sm:px-7 rounded-lg mt-4 transition-all hover:bg-white hover:text-[#0380C8] hover:scale-105"
+    >
+      {isRTL ? "شراء الآن" : "Shop Now"}
+    </Link>
+  </div>
 
-          {/* Image */}
-          <motion.div
-            initial={{ scale: 0.9, opacity: 0 }}
-            whileInView={{ scale: 1, opacity: 1 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-            viewport={{ once: false, amount: 0.3 }}
-            className="flex-shrink-0 relative"
-          >
-            <Image
-              src={banners[0]?.image || "/images/promo/promo-01.png"}
-              alt="promo img"
-              width={420}
-              height={300}
-              className="rounded-2xl object-contain drop-shadow-xl"
-            />
-          </motion.div>
-        </motion.div>
+  {/* Image */}
+  <motion.div
+    initial={{ scale: 0.9, opacity: 0 }}
+    whileInView={{ scale: 1, opacity: 1 }}
+    transition={{ duration: 0.8, ease: "easeOut" }}
+    viewport={{ once: false, amount: 0.3 }}
+    className="flex-shrink-0 relative"
+  >
+    <Image
+      src={banners[0]?.image || "/images/promo/promo-01.png"}
+      alt="promo img"
+      width={300}
+      height={200}
+      className="rounded-xl object-contain drop-shadow-md"
+    />
+  </motion.div>
+</motion.div>
+
+
+
 
         {/* Bannners الصغيرين */}
         <div className="grid gap-10 grid-cols-1 lg:grid-cols-2">

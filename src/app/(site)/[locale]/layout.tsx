@@ -4,7 +4,7 @@ import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { routing } from "@/app/i18n/routing";
 import { notFound } from "next/navigation";
 import ClientLayout from "@/app/(site)/[locale]/ClientLayout";
-import { comfortaa } from "@/app/fonts"; // 👈 نفس الاسم
+import { comfortaa, cairo } from "@/app/fonts"; 
 
 export default async function RootLayout({
   children,
@@ -29,10 +29,13 @@ export default async function RootLayout({
   const dir = isRTL ? "rtl" : "ltr";
   const bodyClass = isRTL ? "rtl" : "ltr";
 
+  // اختار الفونت حسب اللغة
+  const fontClass = isRTL ? cairo.variable : comfortaa.variable;
+
   return (
     <html lang={locale} dir={dir} suppressHydrationWarning>
       <body
-        className={`${comfortaa.variable} font-comfortaa ${bodyClass}`}
+        className={`${fontClass} ${bodyClass}`}
         suppressHydrationWarning
       >
         <NextIntlClientProvider locale={locale} messages={messages}>

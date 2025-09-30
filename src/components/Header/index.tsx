@@ -36,6 +36,7 @@ const Header = () => {
   } = useQuery({
     queryKey: ["categories"],
     queryFn: getCategories,
+    staleTime: 1000 * 60 * 5,
   });
 
   const handleOpenCartModal = () => {
@@ -55,7 +56,10 @@ const Header = () => {
 
   useEffect(() => {
     window.addEventListener("scroll", handleStickyMenu);
-  });
+    return () => {
+      window.removeEventListener("scroll", handleStickyMenu);
+    };
+  }, []);
 
   // Removed user menu event handlers
 
@@ -79,10 +83,11 @@ const Header = () => {
 
   return (
     <header
-      className={`fixed left-0 top-0 w-full z-50 transition-all duration-300 ${
-        stickyMenu ? "shadow-lg bg-[#231f20]" : "bg-[#0380C8]"
-      }`}
-    >
+    className={`fixed left-0 top-0 w-full z-50 transition-all duration-300 ${
+      stickyMenu ? "shadow-lg bg-[#231f20]" : "bg-[#0380C8]"
+    } text-[15px] lg:text-[16px]`}
+  >
+  
       <div className="max-w-[1170px] mx-auto px-4 sm:px-7.5 xl:px-0 flex items-center justify-between py-3">
         {/* <!-- header top start --> */}
         <div
@@ -94,17 +99,19 @@ const Header = () => {
           <div className="xl:w-auto flex-col sm:flex-row w-full flex sm:justify-between sm:items-center gap-5 sm:gap-10">
             {/* Logo */}
             <Link href={`/${locale}`} className="flex-shrink-0">
-              <img
-                src="/images/logo/timboL.png"
+              <Image
+                src="/images/logo/zzzz.png"
                 alt="logo"
-                className="w-[120px] h-[60px]"
+                width={150}
+                height={75}
+                className="logopic"
               />
             </Link>
 
             {/* Search form for large screens */}
-            <div className="max-w-[500px] w-full hidden lg:block">
+            <div className="max-w-[1170px] w-full hidden lg:block pr-[100px]">
               <form>
-                <div className="flex items-center bg-[#E8E8E8] rounded-lg border border-[#0380C8] overflow-hidden">
+                <div className="flex items-center bg-[#E8E8E8] rounded-lg border border-[#0380C8] overflow-hidden w-[500px]">
                   {locale === "en" && (
                     <CustomSelect
                       options={options}
@@ -113,7 +120,7 @@ const Header = () => {
                   )}
 
                   {/* Input + Icon */}
-                  <div className="flex items-center flex-1 px-2">
+                  <div className="flex items-center flex-1 px-3">
                     <input
                       onChange={(e) => setSearchQuery(e.target.value)}
                       value={searchQuery}
@@ -122,12 +129,12 @@ const Header = () => {
                       id="search"
                       placeholder={t("searchPlaceholder")}
                       autoComplete="off"
-                      className="w-full text-[13px] bg-transparent text-[#231f20] py-3 px-2 outline-none font-medium placeholder:text-gray-500"
+                      className="w-full text-[14px] bg-transparent text-[#231f20] py-3 px-3 outline-none font-medium placeholder:text-gray-500"
                     />
                     <button
                       id="search-btn"
                       aria-label="Search"
-                      className="flex items-center justify-center text-[#231f20] hover:text-[#0380C8] transition-colors duration-200 px-2"
+                      className="flex items-center justify-center text-[#231f20] hover:text-[#0380C8] transition-colors duration-200 px-3"
                     >
                       <svg
                         className="fill-current"
@@ -156,25 +163,15 @@ const Header = () => {
           </div>
 
           {/* <!-- header top right --> */}
-          <div className="flex w-full lg:w-auto items-center gap-7.5">
-            {/* Language Switcher */}
-            <div className="hidden xl:block">
-              <LanguageSwitcher />
-            </div>
-
+          <div className="flex w-full lg:w-auto items-center gap-7.5  pr-[50px]">
             {/* Divider */}
-            <span className="hidden xl:block w-px h-7.5 bg-[#E8E8E8]"></span>
 
             <div className="flex w-full lg:w-auto justify-between items-center gap-5">
               <div className="flex items-center gap-5">
                 {/* Logo for small screens */}
                 <Link className="flex-shrink-0 lg:hidden" href={`/${locale}`}>
                   <h1 className="text-2xl font-medium">
-                    <img
-                      src="/images/logo/timboL.png"
-                      alt="logo"
-                      className="w-[120px] h-[60px]"
-                    />
+                
                   </h1>
                 </Link>
 
@@ -393,9 +390,9 @@ const Header = () => {
         <div className="max-w-[1170px] mx-auto px-4 sm:px-7.5 xl:px-0">
           <div className="flex flex-col xl:flex-row xl:items-center xl:justify-between">
             {/* <!--=== Main Nav Start ===--> */}
-            <div className="w-full xl:w-auto h-auto xl:h-auto visible xl:visible flex xl:flex items-center justify-between py-3 xl:py-0">
+            <div className="w-full xl:w-auto h-auto xl:h-auto flex items-center justify-between py-3 xl:py-0">
               {/* <!-- Main Nav Start --> */}
-              <nav>
+              <nav className="order-2 xl:order-1">
                 <ul className="flex items-center flex-row gap-3 sm:gap-4 xl:gap-6 overflow-x-auto xl:overflow-x-visible">
                   {menuData.map((menuItem, i) =>
                     menuItem.submenu ? (
@@ -407,13 +404,13 @@ const Header = () => {
                     ) : (
                       <li
                         key={i}
-                        className=" group relative before:w-0 before:h-[3px] before:bg-[#B7DE11] before:absolute before:left-0 before:top-0 before:rounded-b-[3px] before:ease-out before:duration-200 hover:before:w-full flex-shrink-0"
+                        className="group relative before:w-0 before:h-[3px] before:bg-[#B7DE11] before:absolute before:left-0 before:top-0 before:rounded-b-[3px] before:ease-out before:duration-200 hover:before:w-full flex-shrink-0"
                       >
                         <Link
                           href={`/${locale}/${menuItem.path}`}
                           className={`text-[12px] sm:text-[13px] font-medium flex py-2 
-                            text-[#E8E8E8] hover:text-[#B7DE11] 
-                            ${stickyMenu ? "xl:py-4" : "xl:py-6"}`}
+                text-[#E8E8E8] hover:text-[#B7DE11] 
+                ${stickyMenu ? "xl:py-4" : "xl:py-6"}`}
                         >
                           {locale === "ar"
                             ? menuItem.title_ar
@@ -424,8 +421,17 @@ const Header = () => {
                   )}
                 </ul>
               </nav>
-              {/* //   <!-- Main Nav End --> */}
+
+              {/* Language Switcher - على الشمال */}
+              <div className="hidden xl:flex items-center gap-3 order-1 xl:order-2 pr-[550px]">
+                <span className="w-px h-7.5 bg-[#E8E8E8]"></span>
+                <div className="pl-[180px]">
+                  <LanguageSwitcher />
+                </div>
+              </div>
+              {/* <!-- Main Nav End --> */}
             </div>
+
             {/* // <!--=== Main Nav End ===--> */}
 
             {/* // <!--=== Nav Right Start ===--> */}

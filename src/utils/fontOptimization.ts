@@ -54,7 +54,7 @@ export const criticalCSS = `
   }
 
   html {
-    font-size: 16px;
+    font-size: 18px;
     line-height: 1.5;
     -webkit-text-size-adjust: 100%;
   }
@@ -74,7 +74,7 @@ export const criticalCSS = `
 
   @media (max-width: 768px) {
     html {
-      font-size: 14px;
+      font-size: 16px;
     }
     
     .container {

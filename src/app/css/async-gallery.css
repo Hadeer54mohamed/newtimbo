@@ -97,7 +97,7 @@
 
 .asyncGallery__Counter {
   position: absolute;
-  font-size: 20px;
+  font-size: 22px;
   color: #fff;
   right: 30%;
   bottom: 95px;
@@ -221,7 +221,7 @@
   .asyncGallery__Counter {
     right: 15px;
     bottom: 15px;
-    font-size: 12px;
+    font-size: 14px;
   }
 
   .asyncGallery__Item {

@@ -245,7 +245,8 @@
     "googlePlay": "Google Play",
     "allRightsReserved": "Every Moment Easier",
     "ENSLink":"Developed by",
-    "weAccept": "We Accept:"
+    "weAccept": "We Accept:",
+"note": "© {year}. Every Moment Easier - Developed by <developer>ENS</developer>"
   },
   "orderTracking": {
     "title": "Order Tracking",

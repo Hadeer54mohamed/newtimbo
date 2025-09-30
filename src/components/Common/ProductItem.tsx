@@ -179,22 +179,22 @@ const ProductItem = ({ item }: { item: Product }) => {
           </Link>
         </h3>
 
-        <div className="flex items-center justify-center gap-2 font-semibold text-lg">
+        <span className="flex items-center  gap-2 font-semibold text-lg ">
           {item.offer_price && item.offer_price > 0 ? (
             <>
-              <span className="text-[#0380C8]">
+              <span className="text-green-dark font-semibold">
                 {`${locale === "ar" ? "جنيه" : "pound"} ${item.offer_price}`}
               </span>
-              <span className="text-gray-500 line-through">
+              <span className="text-dark-4 line-through font-semibold">
                 {`${locale === "ar" ? "جنيه" : "pound"} ${item.price}`}
               </span>
             </>
           ) : (
-            <span className="text-[#B7DE11]">
+            <span className="text-red font-semibold">
               {`${locale === "ar" ? "جنيه" : "pound"} ${item.price}`}
             </span>
           )}
-        </div>
+        </span>
       </div>
     </div>
   );

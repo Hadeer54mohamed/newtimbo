@@ -51,7 +51,7 @@ const CustomSelect = ({
   }, [isOpen]);
 
   return (
-    <div className="custom-dropdown relative hidden lg:block w-[200px]">
+    <div className="custom-dropdown relative hidden lg:block w-[150px]">
       {/* Selected */}
       <div
         className={`flex items-center justify-between bg-transparent px-4 py-3 text-[13px] font-medium text-[#231f20] cursor-pointer transition-colors border-r border-[#0380C8] ${

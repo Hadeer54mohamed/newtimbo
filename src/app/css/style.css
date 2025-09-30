@@ -12,11 +12,11 @@
   }
 
   /* RTL Support */
-  body.rtl {
+/*   body.rtl {
     direction: rtl;
     text-align: right;
     font-family: var(--font-comfortaa), Comfortaa, sans-serif;
-  }
+  } */
   .videoz {
     max-width: 1180px;
     margin: auto;
@@ -282,8 +282,21 @@ input[type="search"]::-webkit-search-results-decoration {
   @apply !bg-blue;
 }
 
+/* الانجليزي (الافتراضي) */
+body,
+:lang(en),
 .force-font,
 * {
-  font-family: var(--font-comfortaa), Comfortaa, sans-serif;
+  font-family: "Comfortaa", sans-serif;
 }
 
+/* العربي */
+body.rtl,
+:lang(ar),
+:lang(ar) .force-font,
+:lang(ar) * {
+  font-family: "Cairo", sans-serif;
+  direction: rtl;
+}
+
+.logopic{width:123px;height:39px;}

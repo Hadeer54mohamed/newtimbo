@@ -28,7 +28,7 @@ const VideoSection = () => {
           href="/shop"
           className="px-8 py-3 text-lg font-semibold rounded-2xl 
             bg-[#0380C8] text-[#E8E8E8] 
-            hover:bg-[#231f20] hover:text-[#B7DE11] 
+            hover:bg-[#231f20] hover:text-[#cfff00] 
             transition-all duration-300 hover:scale-105 shadow-lg"
         >
           {locale === "en" ? "Shop Now" : "تسوق الآن"}

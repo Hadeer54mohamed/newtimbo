@@ -245,7 +245,8 @@
     "googlePlay": "جوجل بلاي",
     "allRightsReserved": "كل لحظة أسهل",
     "ENSLink":"تم التطوير بواسطة",
-    "weAccept": "نحن نقبل:"
+    "weAccept": "نحن نقبل:",
+       "note": "© {year}. كل لحظة أسهل - تم التطوير بواسطة <developer>ENS</developer>"
   },
   "orderTracking": {
     "title": "تتبع الطلب",

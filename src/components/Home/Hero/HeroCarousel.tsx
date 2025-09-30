@@ -44,144 +44,143 @@ const HeroCarousal = () => {
 
   return (
     <Swiper
-      spaceBetween={30}
-      centeredSlides={true}
-      autoplay={{
-        delay: 2500,
-        disableOnInteraction: false,
-      }}
-      pagination={{
-        clickable: true,
-        renderBullet: (index, className) =>
-          `<span class="${className} hero-dot"></span>`,
-      }}
-      modules={[Autoplay, Pagination]}
-      className="hero-carousel"
-    >
-      {productsToShow.map((product) => (
-        <SwiperSlide key={product.id}>
-          <div className="relative group">
-            {/* Main Card */}
-            <div className="relative flex flex-col-reverse sm:flex-row items-center bg-white rounded-3xl shadow-xl overflow-hidden border border-[#E8E8E8]/50 transition-all duration-700 hover:shadow-2xl hover:scale-[1.02]">
-              {/* Content Section */}
-              <div
-                className={`relative z-10 max-w-[394px] py-12 sm:py-16 lg:py-20 ${
-                  locale === "en"
-                    ? "pl-6 sm:pl-10 lg:pl-14"
-                    : "pr-6 sm:pr-10 lg:pr-14"
-                }`}
-              >
-                {/* Badge */}
-                <div className="flex items-center gap-4 mb-8 sm:mb-10">
-                  <span className="block font-bold text-xl sm:text-2xl text-[#231f20] bg-[#cfff00] rounded-full px-5 py-2 shadow-md">
-                    {product.offer_price && product.price > product.offer_price
-                      ? Math.round(
-                          ((product.price - product.offer_price) /
-                            product.price) *
-                            100
-                        )
-                      : 30}
-                    %
+  spaceBetween={0} // مفيش مسافة بين الكروت
+  slidesPerView={1} // كرت واحد بس ظاهر
+  autoplay={{
+    delay: 3500,
+    disableOnInteraction: false,
+  }}
+    pagination={{
+      clickable: true,
+      renderBullet: (index, className) =>
+        `<span class="${className} hero-dot"></span>`,
+    }}
+    modules={[Autoplay, Pagination]}
+    className="hero-carousel overflow-hidden"
+  >
+    {productsToShow.map((product) => (
+      <SwiperSlide key={product.id}>
+        <div className="relative group flex justify-center">
+        <div className="relative flex flex-col sm:flex-row items-center bg-white rounded-3xl shadow-xl overflow-hidden border border-[#E8E8E8]/50 transition-all duration-700 hover:shadow-2xl hover:scale-[1.02] w-full max-h-[500px] sm:max-w-[900px]"> {/* زودنا max-h */}
+           {/* Content Section */}
+            <div
+              className={`relative z-10 max-w-[394px]  py-10 sm:py-12 lg:py-16${
+                locale === "en"
+                  ? "pl-6 sm:pl-10 lg:pl-14"
+                  : "pr-6 sm:pr-10 lg:pr-14"
+              }`}
+            >
+              {/* Badge */}
+              <div className="flex items-center gap-4 mb-6 sm:mb-8">
+                <span className="block font-bold text-xl sm:text-lg text-[#231f20] bg-[#cfff00] rounded-full px-5 py-2 shadow-md">
+                  {product.offer_price && product.price > product.offer_price
+                    ? Math.round(
+                        ((product.price - product.offer_price) / product.price) *
+                          100
+                      )
+                    : 30}
+                  %
+                </span>
+  
+                <div className="flex flex-col">
+                  <span className="block text-[#0380C8] font-semibold text-lg sm:text-xl leading-tight">
+                    {locale === "en" ? "Flash Sale" : "عرض خاص"}
                   </span>
-
-                  <div className="flex flex-col">
-                    <span className="block text-[#0380C8] font-semibold text-lg sm:text-xl leading-tight">
-                      {locale === "en" ? "Flash Sale" : "عرض خاص"}
-                    </span>
-                    <span className="block text-[#231f20] text-sm sm:text-base opacity-70">
-                      {locale === "en" ? "Limited Time" : "لفترة محدودة"}
-                    </span>
-                  </div>
-                </div>
-
-                {/* Product Title */}
-                <h1 className="text-[#231f20] text-2xl sm:text-3xl lg:text-4xl mb-4 leading-tight transition-colors duration-300">
-                  <Link
-                    href={`/shop-details?id=${product.id}`}
-                    className="hover:text-[#0380C8] transition-colors duration-300"
-                  >
-                    {locale === "en" ? product.name_en : product.name_ar}
-                  </Link>
-                </h1>
-
-                {/* Price Section */}
-                <div className="flex items-center gap-4 mb-8">
-                  <div className="flex flex-col">
-                    <span className="text-xs text-gray-500 uppercase tracking-wider">
-                      {locale === "en" ? "Special Price" : "السعر الخاص"}
-                    </span>
-                    <span className="font-bold text-[#0380C8] text-2xl sm:text-3xl">
-                      EG{product.offer_price || product.price}
-                    </span>
-                  </div>
-
-                  {product.offer_price &&
-                    product.price > product.offer_price && (
-                      <>
-                        <div className="flex flex-col">
-                          <span className="text-xs text-gray-500 uppercase tracking-wider">
-                            {locale === "en" ? "Was" : "كان"}
-                          </span>
-                          <span className="font-medium text-[#231f20]/50 line-through text-lg sm:text-xl">
-                            EG{product.price}
-                          </span>
-                        </div>
-
-                        <div className="ml-auto">
-                          <span className="block bg-[#0380C8] text-white text-xs font-semibold px-3 py-1 rounded-full text-center">
-                            {locale === "en" ? "Save EG " : "وفر EG "}
-                            {product.price - product.offer_price}
-                          </span>
-                        </div>
-                      </>
-                    )}
-                </div>
-                {/* CTA Button */}
-                <div className="absolute bottom-6 left-6 right-6 sm:static sm:mt-12">
-                  <Link
-                    href={`/shop-details?id=${product.id}`}
-                    className="inline-flex items-center justify-center font-semibold text-white text-lg rounded-2xl bg-[#0380C8] py-3 px-8 transition-all duration-300 hover:bg-[#231f20] hover:scale-105 hover:shadow-lg w-full sm:w-auto"
-                  >
-                    <span className="mr-2">
-                      {locale === "en" ? "Shop Now" : "تسوق الآن"}
-                    </span>
-                    <svg
-                      className="w-5 h-5"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M17 8l4 4m0 0l-4 4m4-4H3"
-                      />
-                    </svg>
-                  </Link>
+                  <span className="block text-[#231f20] text-sm sm:text-base opacity-70">
+                    {locale === "en" ? "Limited Time" : "لفترة محدودة"}
+                  </span>
                 </div>
               </div>
-
-              {/* Image Section */}
-              <div className="relative flex-shrink-0">
-                <Image
-                  src={
-                    Array.isArray(product.image_url)
-                      ? product.image_url[0]
-                      : product.image_url
-                  }
-                  alt={locale === "en" ? product.name_en : product.name_ar}
-                  width={400}
-                  height={450}
-                  className="object-contain w-full h-auto transition-transform duration-700 group-hover:scale-105"
-                  style={{ maxHeight: "450px" }}
-                />
+  
+              {/* Product Title */}
+              <h1 className="text-[#231f20] text-lg sm:text-3xl lg:text-4xl mb-3 leading-tight transition-colors duration-300">
+                <Link
+                  href={`/shop-details?id=${product.id}`}
+                  className="hover:text-[#0380C8] transition-colors duration-300"
+                >
+                  {locale === "en" ? product.name_en : product.name_ar}
+                </Link>
+              </h1>
+  
+              {/* Price Section */}
+              <div className="flex items-center gap-4 mb-6">
+                <div className="flex flex-col">
+                  <span className="text-xs text-gray-500 uppercase tracking-wider">
+                    {locale === "en" ? "Special Price" : "السعر الخاص"}
+                  </span>
+                  <span className="font-bold text-[#0380C8] text-2xl sm:text-3xl">
+                    EG{product.offer_price || product.price}
+                  </span>
+                </div>
+  
+                {product.offer_price && product.price > product.offer_price && (
+                  <>
+                    <div className="flex flex-col">
+                      <span className="text-xs text-gray-500 uppercase tracking-wider">
+                        {locale === "en" ? "Was" : "كان"}
+                      </span>
+                      <span className="font-medium text-[#231f20]/50 line-through text-lg sm:text-xl">
+                        EG{product.price}
+                      </span>
+                    </div>
+  
+                    <div className="ml-auto">
+                      <span className="block bg-[#0380C8] text-white text-xs font-semibold px-3 py-1 rounded-full text-center">
+                        {locale === "en" ? "Save EG " : "وفر EG "}
+                        {product.price - product.offer_price}
+                      </span>
+                    </div>
+                  </>
+                )}
+              </div>
+  
+              {/* CTA Button */}
+              <div className="absolute bottom-4 left-6 right-6 sm:static sm:mt-8">
+                <Link
+                  href={`/shop-details?id=${product.id}`}
+                  className="inline-flex items-center justify-center font-semibold text-white text-lg rounded-2xl bg-[#0380C8] py-3 px-8 transition-all duration-300 hover:bg-[#231f20] hover:scale-105 hover:shadow-lg w-full sm:w-auto"
+                >
+                  <span className="mr-2">
+                    {locale === "en" ? "Shop Now" : "تسوق الآن"}
+                  </span>
+                  <svg
+                    className="w-5 h-5"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M17 8l4 4m0 0l-4 4m4-4H3"
+                    />
+                  </svg>
+                </Link>
               </div>
             </div>
+  
+            {/* Image Section */}
+            <div className="relative flex-shrink-0">
+              <Image
+                src={
+                  Array.isArray(product.image_url)
+                    ? product.image_url[0]
+                    : product.image_url
+                }
+                alt={locale === "en" ? product.name_en : product.name_ar}
+                width={400}
+                height={400}
+                className="object-contain w-full h-full transition-transform duration-700 group-hover:scale-105"
+                style={{ maxHeight: "400px" }}
+              />
+            </div>
           </div>
-        </SwiperSlide>
-      ))}
-    </Swiper>
+        </div>
+      </SwiperSlide>
+    ))}
+  </Swiper>
+  
   );
 };
 
