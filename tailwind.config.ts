@@ -12,7 +12,7 @@ const config: Config = {
   theme: {
     fontFamily: {
       "euclid-circular-a": ["Euclid Circular A"],
-      comfortaa: ["var(--font-comfortaa)", "sans-serif"], 
+      comfortaa: ["var(--font-comfortaa)", "sans-serif"],
     },
     container: {
       center: true,
@@ -115,10 +115,10 @@ const config: Config = {
     extend: {
       colors: {
         brand: {
-          blue: "#0380C8",   // الأزرق الرئيسي
-          dark: "#231f20",   // الأسود/الرمادي الغامق
-          light: "#E8E8E8",  // الرمادي الفاتح
-          lime: "#cfff00",   // الأخضر الليموني
+          blue: "#0380C8", // الأزرق الرئيسي
+          dark: "#231f20", // الأسود/الرمادي الغامق
+          light: "#E8E8E8", // الرمادي الفاتح
+          lime: "#cfff00", // الأخضر الليموني
         },
       },
       backgroundImage: {

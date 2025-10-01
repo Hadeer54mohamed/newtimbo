@@ -24,12 +24,21 @@ const TrackOrderPage = () => {
           const { orders: phoneOrders, error } = await getOrdersByPhone(
             searchValue
           );
+
           if (error || !phoneOrders || phoneOrders.length === 0) {
             // Handle no orders found
             setOrders([]);
             setShowTracking(true);
+          } else if (phoneOrders.length === 1) {
+            // If only one order, go directly to its details
+            const singleOrder = phoneOrders[0];
+            setSelectedOrderId(singleOrder.id);
+            setOrders([]);
+            setShowTracking(true);
           } else {
+            // Multiple orders found - show list for selection
             setOrders(phoneOrders);
+            setSelectedOrderId("");
             setShowTracking(true);
           }
         } catch (error) {
@@ -156,13 +165,23 @@ const TrackOrderPage = () => {
                     <ul className="text-sm text-blue-dark space-y-1">
                       <li>
                         {locale === "ar"
-                          ? "• رقم الطلب يتكون من أرقام وحروف"
-                          : "• Order number consists of numbers and letters"}
+                          ? "• رقم الطلب يتكون من أرقام وحروف (مثل: abc123-def456)"
+                          : "• Order number consists of numbers and letters (e.g., abc123-def456)"}
                       </li>
                       <li>
                         {locale === "ar"
-                          ? "• إذا لم تجد رقم الطلب، يرجى الاتصال بخدمة العملاء"
-                          : "• If you can't find your order number, please contact customer service"}
+                          ? "• رقم الهاتف يجب أن يكون بالضبط كما أدخلته عند الطلب"
+                          : "• Phone number should be exactly as entered during order"}
+                      </li>
+                      <li>
+                        {locale === "ar"
+                          ? "• تأكد من عدم وجود مسافات إضافية في الرقم"
+                          : "• Make sure there are no extra spaces in the number"}
+                      </li>
+                      <li>
+                        {locale === "ar"
+                          ? "• إذا لم تجد طلبك، يرجى الاتصال بخدمة العملاء"
+                          : "• If you can't find your order, please contact customer service"}
                       </li>
                     </ul>
                   </div>
@@ -195,23 +214,29 @@ const TrackOrderPage = () => {
                 </button>
               </div>
 
-              {/* Show Multiple Orders if Phone Search */}
+              {/* Show Multiple Orders List */}
               {searchMethod === "phone" && orders.length > 0 ? (
                 <div className="bg-white shadow-1 rounded-[10px] p-8">
                   <h2 className="text-2xl font-bold text-dark mb-6 text-center">
-                    {t("yourOrders")}
+                    {locale === "ar" ? "طلباتك" : "Your Orders"}
                   </h2>
+                  <p className="text-dark-5 mb-6 text-center">
+                    {locale === "ar"
+                      ? `تم العثور على ${orders.length} طلب. اختر الطلب الذي تريد تتبعه:`
+                      : `Found ${orders.length} orders. Select the order you want to track:`}
+                  </p>
                   <div className="space-y-4">
                     {orders.map((order) => (
                       <div
                         key={order.id}
-                        className="border border-gray-3 rounded-lg p-4 hover:shadow-md transition-shadow"
+                        className="border border-gray-3 rounded-lg p-4 hover:shadow-md transition-shadow cursor-pointer"
+                        onClick={() => handleViewOrder(order.id)}
                       >
                         <div className="flex justify-between items-start">
                           <div className="flex-1">
                             <h3 className="font-semibold text-dark mb-2">
                               {locale === "ar" ? "رقم الطلب:" : "Order ID:"}{" "}
-                              {order.id}
+                              <span className="text-blue">{order.id}</span>
                             </h3>
                             <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
                               <div>
@@ -243,18 +268,25 @@ const TrackOrderPage = () => {
                               </div>
                             </div>
                           </div>
-                          <button
-                            onClick={() => handleViewOrder(order.id)}
-                            className="bg-blue text-white px-4 py-2 rounded-md hover:bg-blue-dark transition-colors text-sm font-medium"
-                          >
-                            {t("viewOrder")}
-                          </button>
+                          <div className="ml-4">
+                            <button
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                handleViewOrder(order.id);
+                              }}
+                              className="bg-blue text-white px-4 py-2 rounded-md hover:bg-blue-dark transition-colors text-sm font-medium"
+                            >
+                              {locale === "ar" ? "تتبع الطلب" : "Track Order"}
+                            </button>
+                          </div>
                         </div>
                       </div>
                     ))}
                   </div>
                 </div>
-              ) : searchMethod === "phone" && orders.length === 0 ? (
+              ) : searchMethod === "phone" &&
+                orders.length === 0 &&
+                !selectedOrderId ? (
                 /* No Orders Found */
                 <div className="bg-white shadow-1 rounded-[10px] p-8 text-center">
                   <div className="text-red-500 text-6xl mb-4">⚠️</div>
@@ -271,7 +303,27 @@ const TrackOrderPage = () => {
                 </div>
               ) : (
                 /* Single Order Tracking */
-                <OrderTracking orderId={selectedOrderId} />
+                <>
+                  {selectedOrderId ? (
+                    <OrderTracking orderId={selectedOrderId} />
+                  ) : (
+                    <div className="bg-white shadow-1 rounded-[10px] p-8 text-center">
+                      <div className="text-red-500 text-6xl mb-4">⚠️</div>
+                      <h2 className="text-2xl font-semibold text-dark mb-4">
+                        خطأ في تحميل الطلب
+                      </h2>
+                      <p className="text-dark-5 mb-6">
+                        لم يتم تحديد رقم الطلب بشكل صحيح
+                      </p>
+                      <button
+                        onClick={handleReset}
+                        className="inline-block bg-blue text-white px-6 py-3 rounded-md hover:bg-blue-dark transition-colors"
+                      >
+                        {locale === "ar" ? "حاول مرة أخرى" : "Try Again"}
+                      </button>
+                    </div>
+                  )}
+                </>
               )}
             </div>
           )}

@@ -239,6 +239,9 @@ export async function getOrderByIdForTracking(
       return { order: null, error: "رقم الطلب مطلوب" };
     }
 
+    // تنظيف معرف الطلب
+    const cleanOrderId = orderId.trim();
+
     const { data: order, error } = await supabase
       .from("orders")
       .select(
@@ -256,15 +259,36 @@ export async function getOrderByIdForTracking(
         payments (*)
       `
       )
-      .eq("id", orderId)
+      .eq("id", cleanOrderId)
       .single();
 
     if (error) {
-      if (error.code === "PGRST116") {
-        // No rows returned
-        return { order: null, error: "لم يتم العثور على الطلب" };
-      }
       console.error("Error fetching order for tracking:", error);
+      if (error.code === "PGRST116") {
+        // No rows returned - try to find similar orders
+        // Search for orders that contain the search term
+        const { data: similarOrders, error: similarError } = await supabase
+          .from("orders")
+          .select("id, created_at, status")
+          .ilike("id", `%${cleanOrderId}%`)
+          .limit(5);
+
+        if (similarError) {
+          console.error("Error searching for similar orders:", similarError);
+        } else if (similarOrders && similarOrders.length > 0) {
+          return {
+            order: null,
+            error: `لم يتم العثور على الطلب بالضبط. هل تقصد أحد هذه الطلبات؟ ${similarOrders
+              .map((o) => o.id)
+              .join(", ")}`,
+          };
+        }
+
+        return {
+          order: null,
+          error: "لم يتم العثور على الطلب. تأكد من إدخال رقم الطلب الصحيح",
+        };
+      }
       return { order: null, error: "حدث خطأ في جلب بيانات الطلب" };
     }
 
@@ -343,7 +367,8 @@ export async function getOrdersByPhone(
     // تنظيف رقم الهاتف من المسافات والرموز
     const cleanPhone = phoneNumber.replace(/\s+/g, "").replace(/[^\d+]/g, "");
 
-    const { data: orders, error } = await supabase
+    // محاولة البحث بالرقم كما هو
+    let { data: orders, error } = await supabase
       .from("orders")
       .select(
         `
@@ -362,6 +387,69 @@ export async function getOrdersByPhone(
       )
       .eq("customer_phone", cleanPhone)
       .order("created_at", { ascending: false });
+
+    // إذا لم نجد نتائج، جرب تنسيقات مختلفة للرقم
+    if ((!orders || orders.length === 0) && !error) {
+      // جرب بدون + في البداية
+      const phoneWithoutPlus = cleanPhone.replace(/^\+/, "");
+      if (phoneWithoutPlus !== cleanPhone) {
+        const { data: ordersWithoutPlus, error: errorWithoutPlus } =
+          await supabase
+            .from("orders")
+            .select(
+              `
+            *,
+            order_items (
+              *,
+              products (
+                id,
+                title,
+                price,
+                images
+              )
+            ),
+            payments (*)
+          `
+            )
+            .eq("customer_phone", phoneWithoutPlus)
+            .order("created_at", { ascending: false });
+
+        if (
+          !errorWithoutPlus &&
+          ordersWithoutPlus &&
+          ordersWithoutPlus.length > 0
+        ) {
+          orders = ordersWithoutPlus;
+        }
+      }
+
+      // جرب البحث الجزئي
+      if (!orders || orders.length === 0) {
+        const { data: partialOrders, error: partialError } = await supabase
+          .from("orders")
+          .select(
+            `
+            *,
+            order_items (
+              *,
+              products (
+                id,
+                title,
+                price,
+                images
+              )
+            ),
+            payments (*)
+          `
+          )
+          .ilike("customer_phone", `%${cleanPhone}%`)
+          .order("created_at", { ascending: false });
+
+        if (!partialError && partialOrders && partialOrders.length > 0) {
+          orders = partialOrders;
+        }
+      }
+    }
 
     if (error) {
       console.error("Error fetching orders by phone:", error);
