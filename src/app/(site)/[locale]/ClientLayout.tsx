@@ -41,7 +41,7 @@ export default function ClientLayout({ children }: ClientLayoutProps) {
             <ModalProvider>
               <PreviewSliderProvider>
                 <Header />
-                <main className="min-h-screen">
+                <main className="min-h-screen pt-[120px] md:pt-0">
                   {children}
                 </main>
                 <QuickViewModal />

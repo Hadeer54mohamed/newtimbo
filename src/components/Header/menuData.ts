@@ -36,11 +36,11 @@ export const menuData: Menu[] = [
     newTab: false,
     path: "/branches",
   },
-  {
+/*   {
     id: 6,
     title_ar: "اتصل بنا",
     title_en: "Contact",
     newTab: false,
     path: "/contact",
-  },
+  }, */
 ];
