@@ -8,7 +8,9 @@
   }
 
   body {
-    @apply font-euclid-circular-a font-normal text-base text-dark-3 relative z-1;
+    @apply font-euclid-circular-a font-normal text-sm sm:text-base text-dark-3 relative z-1;
+    -webkit-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: transparent;
   }
 
   /* RTL Support */
@@ -80,6 +82,167 @@
   .no-scrollbar {
     -ms-overflow-style: none; /* IE and Edge */
     scrollbar-width: none; /* Firefox */
+  }
+
+  /* Mobile optimizations */
+  .mobile-optimized {
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
+  }
+
+  .touch-manipulation {
+    touch-action: manipulation;
+  }
+
+  .safe-area-inset {
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
+  }
+
+  .reduced-motion * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  /* Mobile-specific improvements */
+  @media (max-width: 768px) {
+    .mobile-optimized {
+      -webkit-overflow-scrolling: touch;
+      overscroll-behavior: contain;
+    }
+    
+    .mobile-optimized * {
+      -webkit-tap-highlight-color: transparent;
+    }
+  }
+
+  /* Responsive typography */
+  @media (max-width: 480px) {
+    .text-heading-1 { font-size: 24px; line-height: 32px; }
+    .text-heading-2 { font-size: 20px; line-height: 28px; }
+    .text-heading-3 { font-size: 18px; line-height: 24px; }
+    .text-heading-4 { font-size: 16px; line-height: 22px; }
+    .text-heading-5 { font-size: 14px; line-height: 20px; }
+    .text-heading-6 { font-size: 12px; line-height: 18px; }
+    
+    /* Mobile spacing */
+    .container { padding: 0 1rem; }
+    .px-4 { padding-left: 1rem; padding-right: 1rem; }
+    .py-3 { padding-top: 0.75rem; padding-bottom: 0.75rem; }
+  }
+
+  @media (min-width: 481px) and (max-width: 768px) {
+    .text-heading-1 { font-size: 28px; line-height: 36px; }
+    .text-heading-2 { font-size: 24px; line-height: 32px; }
+    .text-heading-3 { font-size: 20px; line-height: 28px; }
+    .text-heading-4 { font-size: 18px; line-height: 24px; }
+    .text-heading-5 { font-size: 16px; line-height: 24px; }
+    .text-heading-6 { font-size: 14px; line-height: 20px; }
+  }
+
+  @media (min-width: 769px) and (max-width: 1024px) {
+    .text-heading-1 { font-size: 36px; line-height: 44px; }
+    .text-heading-2 { font-size: 30px; line-height: 38px; }
+    .text-heading-3 { font-size: 24px; line-height: 32px; }
+    .text-heading-4 { font-size: 20px; line-height: 28px; }
+    .text-heading-5 { font-size: 18px; line-height: 26px; }
+    .text-heading-6 { font-size: 16px; line-height: 24px; }
+  }
+
+  @media (min-width: 1025px) {
+    .text-heading-1 { font-size: 48px; line-height: 56px; }
+    .text-heading-2 { font-size: 40px; line-height: 48px; }
+    .text-heading-3 { font-size: 32px; line-height: 40px; }
+    .text-heading-4 { font-size: 24px; line-height: 32px; }
+    .text-heading-5 { font-size: 20px; line-height: 28px; }
+    .text-heading-6 { font-size: 18px; line-height: 24px; }
+  }
+
+  /* Mobile-specific improvements */
+  @media (max-width: 768px) {
+    /* Better touch targets */
+    button, a, input, select {
+      min-height: 44px;
+      min-width: 44px;
+    }
+    
+    /* Improved spacing */
+    .gap-3 { gap: 0.75rem; }
+    .gap-4 { gap: 1rem; }
+    .gap-6 { gap: 1.5rem; }
+    
+    /* Better text sizing */
+    .text-sm { font-size: 0.875rem; line-height: 1.25rem; }
+    .text-base { font-size: 1rem; line-height: 1.5rem; }
+    .text-lg { font-size: 1.125rem; line-height: 1.75rem; }
+    
+    /* Mobile navigation */
+    .mobile-nav {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+    
+    .mobile-nav::-webkit-scrollbar {
+      display: none;
+    }
+    
+    /* Mobile header improvements */
+    .mobile-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 50;
+      background: #0380C8;
+      transition: all 0.3s ease;
+    }
+    
+    .mobile-header.sticky {
+      background: #231f20;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    
+    /* Mobile search improvements */
+    .mobile-search {
+      background: #E8E8E8;
+      border: 1px solid #0380C8;
+      border-radius: 0.5rem;
+      overflow: hidden;
+    }
+    
+    .mobile-search input {
+      background: transparent;
+      border: none;
+      outline: none;
+      padding: 0.75rem;
+      font-size: 0.875rem;
+      width: 100%;
+    }
+    
+    /* Mobile cart improvements */
+    .mobile-cart {
+      position: relative;
+      padding: 0.5rem;
+    }
+    
+    .mobile-cart .cart-badge {
+      position: absolute;
+      top: -0.25rem;
+      right: -0.25rem;
+      background: #B7DE11;
+      color: #231f20;
+      border-radius: 50%;
+      width: 1.25rem;
+      height: 1.25rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      font-weight: 500;
+    }
   }
 
   /* Animation utilities */
@@ -202,15 +365,21 @@ input[type="search"]::-webkit-search-results-decoration {
 }
 
 .hero-carousel .swiper-pagination-bullet {
-  @apply h-1 w-4 rounded-[11px] bg-[#DDD];
+  @apply h-1.5 w-5 rounded-[11px] bg-[#DDD];
 }
 
 .hero-carousel .swiper-pagination-bullet-active {
-  @apply w-5.5 bg-blue;
+  @apply w-7 bg-blue;
 }
 
 .hero-carousel .swiper-pagination {
-  @apply xl:!bottom-5;
+  @apply !bottom-0 sm:!bottom-4 xl:!bottom-5;
+}
+
+@media (max-width: 640px) {
+  .hero-carousel .swiper-pagination-bullet {
+    @apply h-2 w-6;
+  }
 }
 
 .common-carousel .swiper-button-next:after,

@@ -82,6 +82,16 @@ export const criticalCSS = `
     }
   }
 
+  @media (max-width: 480px) {
+    html {
+      font-size: 14px;
+    }
+    
+    .container {
+      padding: 0 0.5rem;
+    }
+  }
+
   /* Prevent layout shift */
   img, video, iframe {
     max-width: 100%;

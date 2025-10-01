@@ -13,6 +13,12 @@ function getConnectionSpeed() {
   return "unknown";
 }
 
+function isMobileDevice() {
+  return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+    navigator.userAgent
+  ) || window.innerWidth <= 768;
+}
+
 export function sendToAnalytics(metric: Metric) {
   const body = {
     dsn: process.env.NEXT_PUBLIC_ANALYTICS_ID,
@@ -22,6 +28,8 @@ export function sendToAnalytics(metric: Metric) {
     event_name: metric.name,
     value: metric.value.toString(),
     speed: getConnectionSpeed(),
+    is_mobile: isMobileDevice(),
+    device_type: isMobileDevice() ? "mobile" : "desktop",
   };
 
   if (process.env.NODE_ENV === "development") {

@@ -183,15 +183,15 @@ const ProductItem = ({ item }: { item: Product }) => {
           {item.offer_price && item.offer_price > 0 ? (
             <>
               <span className="text-green-dark font-semibold">
-                {`${locale === "ar" ? "جنيه" : "pound"} ${item.offer_price}`}
+                {`${locale === "ar" ? "جنيه" : "EGP"} ${item.offer_price}`}
               </span>
               <span className="text-dark-4 line-through font-semibold">
-                {`${locale === "ar" ? "جنيه" : "pound"} ${item.price}`}
+                {`${locale === "ar" ? "جنيه" : "EGP"} ${item.price}`}
               </span>
             </>
           ) : (
             <span className="text-red font-semibold">
-              {`${locale === "ar" ? "جنيه" : "pound"} ${item.price}`}
+              {`${locale === "ar" ? "جنيه" : "EGP"} ${item.price}`}
             </span>
           )}
         </span>

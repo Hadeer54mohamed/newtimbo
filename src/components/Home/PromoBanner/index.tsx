@@ -104,46 +104,61 @@ const PromoBanner = () => {
             const banner = banners[i] || { image: `/images/promo/promo-0${i + 1}.png` };
             return (
               <motion.div
-                key={i}
-                variants={cardVariant}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: false, amount: 0.3 }}
-                transition={{ duration: 0.6, ease: "easeOut" }}
-                className={`flex items-center gap-6 rounded-2xl p-6 shadow-md hover:shadow-xl transition-transform hover:-translate-y-1 ${
-                  i === 1 ? "bg-[#231f20] text-white" : "bg-[#E8E8E8]"
-                }`}
-              >
-                <Image
-                  src={banner.image ?? "/images/promo/promo-02.png"}
-                  alt="promo img"
-                  width={180}
-                  height={180}
-                  className="rounded-lg object-contain"
-                />
-                <div className={`flex-1 ${isRTL ? "text-right" : "text-left"}`}>
-                  <h3 className={`text-xl font-bold mb-2 ${i === 1 ? "" : "text-[#231f20]"}`}>
-                    {i === 1
-                      ? isRTL ? "خصم يصل 40%" : "Up to 40% OFF"
-                      : isRTL ? "تمرين في المنزل" : "Workout At Home"}
-                  </h3>
-                  <p className={`text-sm font-semibold ${i === 1 ? "text-[#B7DE11]" : "text-[#0380C8]"}`}>
-                    {i === 1
-                      ? isRTL ? "ساعة آبل أولترا" : "Apple Watch Ultra"
-                      : isRTL ? "خصم 20%" : "20% OFF"}
-                  </p>
-                  <Link
-                    href={`/${currentLocale}/shop`}
-                    className={`inline-flex text-sm font-medium py-2 px-5 mt-4 rounded-lg transition-all hover:scale-105 ${
-                      i === 1
-                        ? "text-[#231f20] bg-[#B7DE11] hover:bg-white hover:text-[#0380C8]"
-                        : "text-white bg-[#0380C8] hover:bg-[#231f20]"
-                    }`}
-                  >
-                    {isRTL ? "شراء الآن" : "Grab Now"}
-                  </Link>
-                </div>
-              </motion.div>
+              key={i}
+              variants={cardVariant}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: false, amount: 0.3 }}
+              transition={{ duration: 0.6, ease: "easeOut" }}
+              className={`flex items-center gap-6 rounded-2xl p-6 shadow-md hover:shadow-xl transition-transform hover:-translate-y-1 ${
+                isRTL ? "flex-row-reverse text-right" : "flex-row text-left"
+              } ${i === 1 ? "bg-[#231f20] text-white" : "bg-[#E8E8E8]"}`}
+            >
+              <Image
+                src={banner.image ?? "/images/promo/promo-02.png"}
+                alt="promo img"
+                width={180}
+                height={180}
+                className="rounded-lg object-contain"
+              />
+              <div className="flex-1">
+                <h3
+                  className={`text-xl font-bold mb-2 ${i === 1 ? "" : "text-[#231f20]"}`}
+                >
+                  {i === 1
+                    ? isRTL
+                      ? "خصم يصل 40%"
+                      : "Up to 40% OFF"
+                    : isRTL
+                    ? "تمرين في المنزل"
+                    : "Workout At Home"}
+                </h3>
+                <p
+                  className={`text-sm font-semibold ${
+                    i === 1 ? "text-[#B7DE11]" : "text-[#0380C8]"
+                  }`}
+                >
+                  {i === 1
+                    ? isRTL
+                      ? "ساعة آبل أولترا"
+                      : "Apple Watch Ultra"
+                    : isRTL
+                    ? "خصم 20%"
+                    : "20% OFF"}
+                </p>
+                <Link
+                  href={`/${currentLocale}/shop`}
+                  className={`inline-flex text-sm font-medium py-2 px-5 mt-4 rounded-lg transition-all hover:scale-105 ${
+                    i === 1
+                      ? "text-[#231f20] bg-[#B7DE11] hover:bg-white hover:text-[#0380C8]"
+                      : "text-white bg-[#0380C8] hover:bg-[#231f20]"
+                  }`}
+                >
+                  {isRTL ? "شراء الآن" : "Grab Now"}
+                </Link>
+              </div>
+            </motion.div>
+            
             );
           })}
         </div>

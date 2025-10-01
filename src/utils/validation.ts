@@ -1,5 +1,6 @@
 /**
  * Validation utilities for guest checkout form
+ * Optimized for mobile devices
  */
 
 export interface CustomerData {
@@ -33,9 +34,10 @@ export function validateCustomerData(data: CustomerData): ValidationErrors {
     errors.lastName = "Last name must be at least 2 characters long";
   }
 
-  // Phone validation (Egyptian format + international)
+  // Phone validation (Egyptian format + international) - Mobile optimized
   const phoneRegex = /^(\+?2)?01[0-9]{9}$|^\+?[1-9]\d{1,14}$/;
-  if (!data.phone || !phoneRegex.test(data.phone.replace(/\s+/g, ""))) {
+  const cleanPhone = data.phone.replace(/\s+/g, "");
+  if (!data.phone || !phoneRegex.test(cleanPhone)) {
     errors.phone = "Please enter a valid phone number";
   }
 
@@ -123,4 +125,70 @@ export function createEmptyCustomerData(): CustomerData {
     state: "",
     postcode: "",
   };
+}
+
+/**
+ * Checks if the current device is mobile
+ */
+export function isMobileDevice(): boolean {
+  if (typeof window === 'undefined') return false;
+  
+  return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+    navigator.userAgent
+  ) || window.innerWidth <= 768;
+}
+
+/**
+ * Mobile-optimized validation with shorter error messages
+ */
+export function validateCustomerDataMobile(data: CustomerData): ValidationErrors {
+  const errors: ValidationErrors = {};
+  const isMobile = isMobileDevice();
+
+  // First Name validation
+  if (!data.firstName || data.firstName.trim().length < 2) {
+    errors.firstName = isMobile ? "Name too short" : "First name must be at least 2 characters long";
+  }
+
+  // Last Name validation
+  if (!data.lastName || data.lastName.trim().length < 2) {
+    errors.lastName = isMobile ? "Name too short" : "Last name must be at least 2 characters long";
+  }
+
+  // Phone validation (Egyptian format + international) - Mobile optimized
+  const phoneRegex = /^(\+?2)?01[0-9]{9}$|^\+?[1-9]\d{1,14}$/;
+  const cleanPhone = data.phone.replace(/\s+/g, "");
+  if (!data.phone || !phoneRegex.test(cleanPhone)) {
+    errors.phone = isMobile ? "Invalid phone" : "Please enter a valid phone number";
+  }
+
+  // Email validation (optional but must be valid if provided)
+  if (data.email && data.email.trim()) {
+    const emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
+    if (!emailRegex.test(data.email)) {
+      errors.email = isMobile ? "Invalid email" : "Please enter a valid email address";
+    }
+  }
+
+  // Street Address validation
+  if (!data.streetAddress || data.streetAddress.trim().length < 5) {
+    errors.streetAddress = isMobile ? "Address too short" : "Street address must be at least 5 characters long";
+  }
+
+  // City validation
+  if (!data.city || data.city.trim().length < 2) {
+    errors.city = isMobile ? "City required" : "City must be at least 2 characters long";
+  }
+
+  // State validation
+  if (!data.state || data.state.trim().length < 2) {
+    errors.state = isMobile ? "State required" : "State/Governorate must be at least 2 characters long";
+  }
+
+  // Postcode validation
+  if (!data.postcode || data.postcode.trim().length < 3) {
+    errors.postcode = isMobile ? "Postcode required" : "Postal code must be at least 3 characters long";
+  }
+
+  return errors;
 }

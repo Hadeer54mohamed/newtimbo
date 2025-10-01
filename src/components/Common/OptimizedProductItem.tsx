@@ -196,15 +196,15 @@ const ProductItem = memo(({ item, priority = false }: ProductItemProps) => {
         item.offer_price > 0 ? (
           <>
             <span className="text-lg font-bold text-primary">
-              ${item.offer_price.toFixed(2)}
+              {item.offer_price.toFixed(2)} {locale === "ar" ? "ج.م" : "EGP"}
             </span>
             <span className="text-sm text-gray-400 line-through">
-              ${item.price.toFixed(2)}
+              {item.price.toFixed(2)} {locale === "ar" ? "ج.م" : "EGP"}
             </span>
           </>
         ) : (
           <span className="text-lg font-bold text-primary">
-            ${item.price.toFixed(2)}
+            {item.price.toFixed(2)} {locale === "ar" ? "ج.م" : "EGP"}
           </span>
         )}
       </div>

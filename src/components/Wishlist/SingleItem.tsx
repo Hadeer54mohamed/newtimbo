@@ -83,7 +83,7 @@ const SingleItem = ({ item }: { item: any }) => {
       </div>
 
       <div className="min-w-[205px]">
-        <p className="text-dark">${item.discountedPrice}</p>
+        <p className="text-dark">{item.discountedPrice} {locale === "ar" ? "ج.م" : "EGP"}</p>
       </div>
 
       <div className="min-w-[265px]">

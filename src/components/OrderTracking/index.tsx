@@ -304,7 +304,7 @@ const OrderTracking: React.FC<OrderTrackingProps> = ({ orderId }) => {
                   {locale === "ar" ? "المجموع:" : "Total:"}
                 </span>
                 <span className="font-bold text-dark text-lg">
-                  ${order.total_price.toFixed(2)}
+                  {order.total_price.toFixed(2)} {locale === "ar" ? "ج.م" : "EGP"}
                 </span>
               </div>
             </div>
@@ -388,7 +388,7 @@ const OrderTracking: React.FC<OrderTrackingProps> = ({ orderId }) => {
                   </div>
                   <div className="text-right">
                     <p className="font-medium text-dark">
-                      ${(item.price * item.quantity).toFixed(2)}
+                      {(item.price * item.quantity).toFixed(2)} {locale === "ar" ? "ج.م" : "EGP"}
                     </p>
                   </div>
                 </div>

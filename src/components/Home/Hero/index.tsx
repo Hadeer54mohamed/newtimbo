@@ -35,9 +35,12 @@ const Hero = () => {
   ];
 
   const productsToShow =
-    limitedTimeProducts && limitedTimeProducts.length > 0
-      ? limitedTimeProducts.slice(0, 2)
-      : fallbackProducts;
+  limitedTimeProducts && limitedTimeProducts.length > 0
+    ? [...limitedTimeProducts]  
+        .reverse()            
+        .slice(0, 2)           
+    : fallbackProducts;
+
 
   return (
     <section className="overflow-hidden bg-gradient-to-b from-[#E8E8E8]/10 to-white pb-12 lg:pb-14 xl:pb-16">
@@ -49,7 +52,7 @@ const Hero = () => {
             <Image
               src="/images/hero/hero-bg.png"
               alt="hero background shapes"
-              className="absolute right-0 bottom-0 -z-10 opacity-60"
+              className="absolute right-0 bottom-0 -z-10 opacity-60 hidden sm:block"
               width={534}
               height={520}
             />
@@ -86,12 +89,12 @@ const Hero = () => {
                       </p>
                       <span className="flex items-center gap-3">
                         <span className="font-semibold text-[#0380C8] text-lg">
-                          ${product.offer_price || product.price}
+                          {product.offer_price || product.price} {locale === "ar" ? "ج.م" : "EGP"}
                         </span>
                         {product.offer_price &&
                           product.price > product.offer_price && (
                             <span className="font-medium text-[#231f20]/50 line-through">
-                              ${product.price}
+                              {product.price} {locale === "ar" ? "ج.م" : "EGP"}
                             </span>
                           )}
                       </span>

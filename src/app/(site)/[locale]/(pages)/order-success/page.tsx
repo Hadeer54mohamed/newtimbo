@@ -240,7 +240,7 @@ const OrderSuccessPage = () => {
                   </div>
                   <div className="flex justify-between">
                     <span className="text-dark-5">{locale === "ar" ? "المجموع:" : "Total:"}</span>
-                    <span className="font-bold text-dark text-lg">${order.total_price.toFixed(2)}</span>
+                    <span className="font-bold text-dark text-lg">{order.total_price.toFixed(2)} {locale === "ar" ? "ج.م" : "EGP"}</span>
                   </div>
                 </div>
               </div>
@@ -294,7 +294,7 @@ const OrderSuccessPage = () => {
                         <p className="text-sm text-dark-5">{locale === "ar" ? "الكمية:" : "Quantity:"} {item.quantity}</p>
                       </div>
                       <div className="text-right">
-                        <p className="font-medium text-dark">${(item.price * item.quantity).toFixed(2)}</p>
+                        <p className="font-medium text-dark">{(item.price * item.quantity).toFixed(2)} {locale === "ar" ? "ج.م" : "EGP"}</p>
                       </div>
                     </div>
                   ))}

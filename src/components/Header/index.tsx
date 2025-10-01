@@ -83,8 +83,10 @@ const Header = () => {
 
   return (
     <header
-    className={`fixed left-0 top-0 w-full z-50 transition-all duration-300 ${
-      stickyMenu ? "shadow-lg bg-[#231f20]" : "bg-[#0380C8]"
+    className={`fixed left-0 top-0 w-full z-50 transition-all duration-300 rounded-b-2xl ${
+      stickyMenu
+        ? "shadow-lg bg-gradient-to-b from-[#000000] to-[#2b2b2b]"
+        : "bg-gradient-to-b from-[#036BA5] to-[#0380C8]"
     } text-[15px] lg:text-[16px]`}
   >
   
@@ -390,7 +392,7 @@ const Header = () => {
         <div className="max-w-[1170px] mx-auto px-4 sm:px-7.5 xl:px-0">
           <div className="flex flex-col xl:flex-row xl:items-center xl:justify-between">
             {/* <!--=== Main Nav Start ===--> */}
-            <div className="w-full xl:w-auto h-auto xl:h-auto flex items-center justify-between py-3 xl:py-0">
+            <div className="w-full xl:w-full h-auto xl:h-auto py-0 flex items-center justify-between  xl:py-0">
               {/* <!-- Main Nav Start --> */}
               <nav className="order-2 xl:order-1">
                 <ul className="flex items-center flex-row gap-3 sm:gap-4 xl:gap-6 overflow-x-auto xl:overflow-x-visible">
@@ -410,7 +412,7 @@ const Header = () => {
                           href={`/${locale}/${menuItem.path}`}
                           className={`text-[12px] sm:text-[13px] font-medium flex py-2 
                 text-[#E8E8E8] hover:text-[#B7DE11] 
-                ${stickyMenu ? "xl:py-4" : "xl:py-6"}`}
+                ${stickyMenu ? "xl:py-2" : "xl:py-4"}`}
                         >
                           {locale === "ar"
                             ? menuItem.title_ar
@@ -422,10 +424,10 @@ const Header = () => {
                 </ul>
               </nav>
 
-              {/* Language Switcher - على الشمال */}
-              <div className="hidden xl:flex items-center gap-3 order-1 xl:order-2 pr-[550px]">
+              {/* Language Switcher */}
+              <div className={`hidden xl:flex items-center gap-3 ${locale === "ar" ? "order-1 mr-auto" : "order-2 ml-auto"}`}>
                 <span className="w-px h-7.5 bg-[#E8E8E8]"></span>
-                <div className="pl-[180px]">
+                <div>
                   <LanguageSwitcher />
                 </div>
               </div>

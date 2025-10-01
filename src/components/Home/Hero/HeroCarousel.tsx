@@ -38,14 +38,17 @@ const HeroCarousal = () => {
   ];
 
   const productsToShow =
-    limitedTimeProducts && limitedTimeProducts.length > 0
-      ? limitedTimeProducts.slice(0, 2)
-      : fallbackProducts;
+  limitedTimeProducts && limitedTimeProducts.length > 0
+    ? [...limitedTimeProducts]  // ناخد نسخة
+        .reverse()              // نقلب الترتيب
+        .slice(0, 2)            // ناخد أحدث ٢
+    : fallbackProducts;
+
 
   return (
     <Swiper
-  spaceBetween={0} // مفيش مسافة بين الكروت
-  slidesPerView={1} // كرت واحد بس ظاهر
+  spaceBetween={0}
+  slidesPerView={1}
   autoplay={{
     delay: 3500,
     disableOnInteraction: false,
@@ -56,23 +59,23 @@ const HeroCarousal = () => {
         `<span class="${className} hero-dot"></span>`,
     }}
     modules={[Autoplay, Pagination]}
-    className="hero-carousel overflow-hidden"
+    className="hero-carousel overflow-hidden touch-manipulation"
   >
     {productsToShow.map((product) => (
       <SwiperSlide key={product.id}>
-        <div className="relative group flex justify-center">
-        <div className="relative flex flex-col sm:flex-row items-center bg-white rounded-3xl shadow-xl overflow-hidden border border-[#E8E8E8]/50 transition-all duration-700 hover:shadow-2xl hover:scale-[1.02] w-full max-h-[500px] sm:max-w-[900px]"> {/* زودنا max-h */}
+        <div className="relative group flex justify-center px-3 sm:px-0">
+        <div className="relative flex flex-col sm:flex-row items-center bg-white rounded-2xl sm:rounded-3xl shadow-xl overflow-hidden border border-[#E8E8E8]/50 transition-all duration-700 hover:shadow-2xl sm:hover:scale-[1.02] w-full max-h-[420px] sm:max-h-[500px] sm:max-w-[900px]">
            {/* Content Section */}
             <div
-              className={`relative z-10 max-w-[394px]  py-10 sm:py-12 lg:py-16${
+              className={`relative z-10 max-w-[394px]  py-6 sm:py-12 lg:py-16${
                 locale === "en"
-                  ? "pl-6 sm:pl-10 lg:pl-14"
-                  : "pr-6 sm:pr-10 lg:pr-14"
+                  ? "pl-4 sm:pl-10 lg:pl-14"
+                  : "pr-4 sm:pr-10 lg:pr-14"
               }`}
             >
               {/* Badge */}
-              <div className="flex items-center gap-4 mb-6 sm:mb-8">
-                <span className="block font-bold text-xl sm:text-lg text-[#231f20] bg-[#cfff00] rounded-full px-5 py-2 shadow-md">
+              <div className="flex items-center gap-3 sm:gap-4 mb-4 sm:mb-8">
+                <span className="block font-bold text-lg sm:text-lg text-[#231f20] bg-[#cfff00] rounded-full px-4 py-1.5 shadow-md">
                   {product.offer_price && product.price > product.offer_price
                     ? Math.round(
                         ((product.price - product.offer_price) / product.price) *
@@ -83,17 +86,17 @@ const HeroCarousal = () => {
                 </span>
   
                 <div className="flex flex-col">
-                  <span className="block text-[#0380C8] font-semibold text-lg sm:text-xl leading-tight">
+                  <span className="block text-[#0380C8] font-semibold text-base sm:text-xl leading-tight">
                     {locale === "en" ? "Flash Sale" : "عرض خاص"}
                   </span>
-                  <span className="block text-[#231f20] text-sm sm:text-base opacity-70">
+                  <span className="block text-[#231f20] text-xs sm:text-base opacity-70">
                     {locale === "en" ? "Limited Time" : "لفترة محدودة"}
                   </span>
                 </div>
               </div>
   
               {/* Product Title */}
-              <h1 className="text-[#231f20] text-lg sm:text-3xl lg:text-4xl mb-3 leading-tight transition-colors duration-300">
+              <h1 className="text-[#231f20] text-base sm:text-3xl lg:text-4xl mb-3 leading-tight transition-colors duration-300">
                 <Link
                   href={`/shop-details?id=${product.id}`}
                   className="hover:text-[#0380C8] transition-colors duration-300"
@@ -103,30 +106,30 @@ const HeroCarousal = () => {
               </h1>
   
               {/* Price Section */}
-              <div className="flex items-center gap-4 mb-6">
+              <div className="flex items-center gap-3 sm:gap-4 mb-4 sm:mb-6">
                 <div className="flex flex-col">
-                  <span className="text-xs text-gray-500 uppercase tracking-wider">
+                  <span className="text-[10px] sm:text-xs text-gray-500 uppercase tracking-wider">
                     {locale === "en" ? "Special Price" : "السعر الخاص"}
                   </span>
-                  <span className="font-bold text-[#0380C8] text-2xl sm:text-3xl">
-                    EG{product.offer_price || product.price}
+                  <span className="font-bold text-[#0380C8] text-xl sm:text-3xl">
+                    {locale === "ar" ? "ج.م" : "EGP"} {product.offer_price || product.price}
                   </span>
                 </div>
   
                 {product.offer_price && product.price > product.offer_price && (
                   <>
                     <div className="flex flex-col">
-                      <span className="text-xs text-gray-500 uppercase tracking-wider">
+                      <span className="text-[10px] sm:text-xs text-gray-500 uppercase tracking-wider">
                         {locale === "en" ? "Was" : "كان"}
                       </span>
-                      <span className="font-medium text-[#231f20]/50 line-through text-lg sm:text-xl">
-                        EG{product.price}
+                      <span className="font-medium text-[#231f20]/50 line-through text-base sm:text-xl">
+                        {locale === "ar" ? "ج.م" : "EGP"} {product.price}
                       </span>
                     </div>
   
-                    <div className="ml-auto">
+                    <div className="ml-auto hidden sm:block">
                       <span className="block bg-[#0380C8] text-white text-xs font-semibold px-3 py-1 rounded-full text-center">
-                        {locale === "en" ? "Save EG " : "وفر EG "}
+                        {locale === "en" ? "Save EGP " : "وفر EGP "}
                         {product.price - product.offer_price}
                       </span>
                     </div>
@@ -135,10 +138,10 @@ const HeroCarousal = () => {
               </div>
   
               {/* CTA Button */}
-              <div className="absolute bottom-4 left-6 right-6 sm:static sm:mt-8">
+              <div className="absolute bottom-3 left-4 right-4 sm:static sm:mt-8">
                 <Link
                   href={`/shop-details?id=${product.id}`}
-                  className="inline-flex items-center justify-center font-semibold text-white text-lg rounded-2xl bg-[#0380C8] py-3 px-8 transition-all duration-300 hover:bg-[#231f20] hover:scale-105 hover:shadow-lg w-full sm:w-auto"
+                  className="inline-flex items-center justify-center font-semibold text-white text-base sm:text-lg rounded-xl sm:rounded-2xl bg-[#0380C8] py-2.5 sm:py-3 px-6 sm:px-8 transition-all duration-300 hover:bg-[#231f20] sm:hover:scale-105 hover:shadow-lg w-full sm:w-auto sm:mb-2"
                 >
                   <span className="mr-2">
                     {locale === "en" ? "Shop Now" : "تسوق الآن"}
@@ -161,7 +164,7 @@ const HeroCarousal = () => {
             </div>
   
             {/* Image Section */}
-            <div className="relative flex-shrink-0">
+            <div className="relative flex-shrink-0 w-full sm:w-auto">
               <Image
                 src={
                   Array.isArray(product.image_url)
@@ -171,7 +174,7 @@ const HeroCarousal = () => {
                 alt={locale === "en" ? product.name_en : product.name_ar}
                 width={400}
                 height={400}
-                className="object-contain w-full h-full transition-transform duration-700 group-hover:scale-105"
+                className="object-contain w-full h-[220px] sm:h-full transition-transform duration-700 group-hover:scale-105"
                 style={{ maxHeight: "400px" }}
               />
             </div>

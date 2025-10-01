@@ -200,7 +200,7 @@ const Checkout = () => {
                           </div>
                           <div className="text-start">
                             <p className="text-dark font-medium">
-                              $
+                              {locale === "ar" ? "ج.م" : "EGP"}
                               {(item.discountedPrice * item.quantity).toFixed(
                                 2
                               )}
@@ -222,7 +222,7 @@ const Checkout = () => {
                         </div>
                         <div>
                           <p className="font-medium text-lg text-dark text-start">
-                            ${totalPrice.toFixed(2)}
+                            {totalPrice.toFixed(2)} {locale === "ar" ? "ج.م" : "EGP"}
                           </p>
                         </div>
                       </div>

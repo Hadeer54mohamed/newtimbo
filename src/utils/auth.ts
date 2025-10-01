@@ -9,6 +9,42 @@ export const generateUserGuid = (): string => {
 };
 
 /**
+ * Check if the current device is mobile
+ * @returns {boolean} True if mobile device
+ */
+export const isMobileDevice = (): boolean => {
+  if (typeof window === 'undefined') return false;
+  
+  return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+    navigator.userAgent
+  ) || window.innerWidth <= 768;
+};
+
+/**
+ * Mobile-optimized password validation with shorter feedback
+ * @param {string} password - The password to validate
+ * @returns {PasswordValidation} Validation result with mobile-optimized feedback
+ */
+export const validatePasswordMobile = (password: string): PasswordValidation => {
+  const validation = validatePassword(password);
+  
+  if (isMobileDevice()) {
+    // Shorten feedback messages for mobile
+    const shortFeedback = {
+      ar: validation.feedback.ar.replace(/كلمة مرور/g, 'كلمة'),
+      en: validation.feedback.en.replace(/password/gi, 'pwd')
+    };
+    
+    return {
+      ...validation,
+      feedback: shortFeedback
+    };
+  }
+  
+  return validation;
+};
+
+/**
  * Password strength levels
  */
 export enum PasswordStrength {
@@ -149,19 +185,21 @@ export const validatePassword = (password: string): PasswordValidation => {
 export const getPasswordStrengthColor = (
   strength: PasswordStrength
 ): string => {
+  const isMobile = isMobileDevice();
+  
   switch (strength) {
     case PasswordStrength.VERY_WEAK:
-      return "text-red-600";
+      return isMobile ? "text-red-500" : "text-red-600";
     case PasswordStrength.WEAK:
-      return "text-red-500";
+      return isMobile ? "text-red-400" : "text-red-500";
     case PasswordStrength.FAIR:
-      return "text-yellow-500";
+      return isMobile ? "text-yellow-400" : "text-yellow-500";
     case PasswordStrength.GOOD:
-      return "text-green-500";
+      return isMobile ? "text-green-400" : "text-green-500";
     case PasswordStrength.STRONG:
-      return "text-green-500";
+      return isMobile ? "text-green-500" : "text-green-600";
     default:
-      return "text-gray-500";
+      return isMobile ? "text-gray-400" : "text-gray-500";
   }
 };
 
@@ -173,18 +211,57 @@ export const getPasswordStrengthColor = (
 export const getPasswordStrengthBgColor = (
   strength: PasswordStrength
 ): string => {
+  const isMobile = isMobileDevice();
+  
   switch (strength) {
     case PasswordStrength.VERY_WEAK:
-      return "bg-red-600";
+      return isMobile ? "bg-red-500" : "bg-red-600";
     case PasswordStrength.WEAK:
-      return "bg-red-500";
+      return isMobile ? "bg-red-400" : "bg-red-500";
     case PasswordStrength.FAIR:
-      return "bg-yellow-500";
+      return isMobile ? "bg-yellow-400" : "bg-yellow-500";
     case PasswordStrength.GOOD:
-      return "bg-green-500";
+      return isMobile ? "bg-green-400" : "bg-green-500";
     case PasswordStrength.STRONG:
-      return "bg-green-500";
+      return isMobile ? "bg-green-500" : "bg-green-600";
     default:
-      return "bg-gray-300";
+      return isMobile ? "bg-gray-400" : "bg-gray-300";
   }
+};
+
+/**
+ * Mobile-optimized password requirements display
+ * @returns {string[]} Array of requirement messages
+ */
+export const getMobilePasswordRequirements = (): string[] => {
+  return [
+    "8+ characters",
+    "Uppercase letter",
+    "Lowercase letter", 
+    "Number",
+    "Special character"
+  ];
+};
+
+/**
+ * Mobile-optimized password requirements display in Arabic
+ * @returns {string[]} Array of requirement messages in Arabic
+ */
+export const getMobilePasswordRequirementsAr = (): string[] => {
+  return [
+    "8+ أحرف",
+    "حرف كبير",
+    "حرف صغير",
+    "رقم",
+    "رمز خاص"
+  ];
+};
+
+/**
+ * Get mobile-optimized password requirements based on locale
+ * @param {string} locale - The locale (ar or en)
+ * @returns {string[]} Array of requirement messages
+ */
+export const getMobilePasswordRequirementsByLocale = (locale: string): string[] => {
+  return locale === "ar" ? getMobilePasswordRequirementsAr() : getMobilePasswordRequirements();
 };

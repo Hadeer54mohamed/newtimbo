@@ -179,15 +179,15 @@ const SingleListItem = ({ item }: { item: Product }) => {
               {item.offer_price && item.offer_price > 0 ? (
                 <>
                   <span className="text-dark">
-                    {`${locale === "ar" ? "ج.م" : "$"} ${item.offer_price}`}
+                    {`${locale === "ar" ? "ج.م" : "EGP"} ${item.offer_price}`}
                   </span>
                   <span className="text-dark-4 line-through">
-                    {`${locale === "ar" ? "ج.م" : "$"} ${item.price}`}
+                    {`${locale === "ar" ? "ج.م" : "EGP"} ${item.price}`}
                   </span>
                 </>
               ) : (
                 <span className="text-dark">
-                  {`${locale === "ar" ? "ج.م" : "$"} ${item.price}`}
+                  {`${locale === "ar" ? "ج.م" : "EGP"} ${item.price}`}
                 </span>
               )}
             </span>

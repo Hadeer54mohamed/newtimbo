@@ -69,15 +69,15 @@ const SingleItem = ({ item }: { item: Product }) => {
   {item.offer_price && item.offer_price > 0 ? (
     <>
       <span className="text-[#0380C8] font-semibold">
-        {`${locale === "ar" ? "جنيه" : "Pound"} ${item.offer_price}`}
+        {`${locale === "ar" ? "جنيه" : "EGP"} ${item.offer_price}`}
       </span>
       <span className="text-dark-4 line-through">
-        {`${locale === "ar" ? "جنيه" : "Pound"} ${item.price}`}
+        {`${locale === "ar" ? "جنيه" : "EGP"} ${item.price}`}
       </span>
     </>
   ) : (
     <span className="text-[#0380C8] font-semibold">
-      {`${locale === "ar" ? "جنيه" : "Pound"} ${item.price}`}
+      {`${locale === "ar" ? "جنيه" : "EGP"} ${item.price}`}
     </span>
   )}
 </span>

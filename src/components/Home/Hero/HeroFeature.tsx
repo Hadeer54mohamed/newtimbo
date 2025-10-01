@@ -61,7 +61,7 @@ const HeroFeature = () => {
               <h3 className="font-semibold text-lg text-[#231f20] leading-snug transition-colors duration-300 group-hover:text-[#0380C8]">
                 {locale === "en" ? item.title_en : item.title_ar}
               </h3>
-              <p className="text-sm text-[#0380C8]/80 mt-1 leading-relaxed transition-colors duration-300 group-hover:text-[#B7DE11]">
+              <p className="text-sm text-[#0380C8]/80 mt-1 leading-relaxed transition-colors duration-300 group-hover:text-[#cfff00]">
                 {locale === "en" ? item.description_en : item.description_ar}
               </p>
             </div>

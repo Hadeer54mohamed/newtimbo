@@ -35,7 +35,7 @@ const LatestProducts = ({ products }: { products?: any[] }) => {
                   </Link>
                 </h3>
                 <p className="text-custom-sm">
-                  {locale === "ar" ? "السعر:" : "Price:"} ${product.price}
+                  {locale === "ar" ? "السعر:" : "Price:"} {product.price} {locale === "ar" ? "ج.م" : "EGP"}
                 </p>
               </div>
             </div>

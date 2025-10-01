@@ -65,26 +65,14 @@ const nextConfig = {
       {
         source: "/(.*)",
         headers: [
-          {
-            key: "X-DNS-Prefetch-Control",
-            value: "on",
-          },
-          {
-            key: "X-XSS-Protection",
-            value: "1; mode=block",
-          },
-          {
-            key: "X-Frame-Options",
-            value: "SAMEORIGIN",
-          },
-          {
-            key: "X-Content-Type-Options",
-            value: "nosniff",
-          },
+          { key: "X-DNS-Prefetch-Control", value: "on" },
+          { key: "X-XSS-Protection", value: "1; mode=block" },
+          { key: "X-Frame-Options", value: "SAMEORIGIN" },
+          { key: "X-Content-Type-Options", value: "nosniff" },
         ],
       },
       {
-        source: "/fonts/(.*)",
+        source: "/fonts/:all*",
         headers: [
           {
             key: "Cache-Control",
@@ -93,7 +81,7 @@ const nextConfig = {
         ],
       },
       {
-        source: "/images/(.*)",
+        source: "/images/:all*",
         headers: [
           {
             key: "Cache-Control",
@@ -102,7 +90,16 @@ const nextConfig = {
         ],
       },
       {
-        source: "/_next/static/(.*)",
+        source: "/:all*.(mp4|webm|ogg)",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "public, max-age=31536000, immutable",
+          },
+        ],
+      },
+      {
+        source: "/_next/static/:all*",
         headers: [
           {
             key: "Cache-Control",

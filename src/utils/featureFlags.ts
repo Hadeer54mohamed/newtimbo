@@ -21,6 +21,12 @@ export const FeatureFlags = {
   ENABLE_WHATSAPP_NOTIFICATIONS: getFeatureFlag(
     "ENABLE_WHATSAPP_NOTIFICATIONS"
   ),
+  ENABLE_MOBILE_OPTIMIZATIONS: getFeatureFlag(
+    "ENABLE_MOBILE_OPTIMIZATIONS"
+  ),
+  ENABLE_REDUCED_MOTION: getFeatureFlag(
+    "ENABLE_REDUCED_MOTION"
+  ),
 } as const;
 
 // Type-safe feature flag checker
@@ -35,6 +41,17 @@ export const logFeatureFlags = () => {
   if (process.env.NODE_ENV === "development") {
     console.log("🚩 Feature Flags Status:", {
       ENABLE_WHATSAPP_NOTIFICATIONS: FeatureFlags.ENABLE_WHATSAPP_NOTIFICATIONS,
+      ENABLE_MOBILE_OPTIMIZATIONS: FeatureFlags.ENABLE_MOBILE_OPTIMIZATIONS,
+      ENABLE_REDUCED_MOTION: FeatureFlags.ENABLE_REDUCED_MOTION,
     });
   }
+};
+
+// Mobile-specific feature flag helpers
+export const isMobileOptimizationEnabled = (): boolean => {
+  return FeatureFlags.ENABLE_MOBILE_OPTIMIZATIONS;
+};
+
+export const isReducedMotionEnabled = (): boolean => {
+  return FeatureFlags.ENABLE_REDUCED_MOTION;
 };

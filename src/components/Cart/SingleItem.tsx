@@ -58,7 +58,7 @@ const SingleItem = ({ item }: { item: any }) => {
       </div>
 
       <div className="min-w-[180px]">
-        <p className="text-dark">${item.discountedPrice}</p>
+        <p className="text-dark">{item.discountedPrice} {locale === "ar" ? "ج.م" : "EGP"}</p>
       </div>
 
       <div className="min-w-[275px]">
@@ -114,7 +114,7 @@ const SingleItem = ({ item }: { item: any }) => {
       </div>
 
       <div className="min-w-[200px]">
-        <p className="text-dark">${item.discountedPrice * quantity}</p>
+        <p className="text-dark">{item.discountedPrice * quantity} {locale === "ar" ? "ج.م" : "EGP"}</p>
       </div>
 
       <div className="min-w-[50px] flex justify-end">
