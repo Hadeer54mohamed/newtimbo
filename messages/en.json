@@ -244,17 +244,23 @@
     "getInOn": "Get in On",
     "googlePlay": "Google Play",
     "allRightsReserved": "Every Moment Easier",
-    "ENSLink":"Developed by",
+    "ENSLink": "Developed by",
     "weAccept": "We Accept:",
-"note": "© {year}. Every Moment Easier - Developed by <developer>ENS</developer>"
+    "note": "© {year}. Every Moment Easier - Developed by <developer>ENS</developer>"
   },
   "orderTracking": {
     "title": "Order Tracking",
-    "enterOrderNumber": "Enter Order Number",
+    "enterOrderNumber": "Enter Order Number or Phone Number",
     "orderNumber": "Order Number",
+    "phoneNumber": "Phone Number",
     "trackOrder": "Track Order",
+    "searchByOrderId": "Search by Order ID",
+    "searchByPhone": "Search by Phone Number",
+    "selectSearchMethod": "Select Search Method",
     "orderNotFound": "Order Not Found",
+    "ordersNotFound": "No Orders Found",
     "orderNotFoundDesc": "Please make sure you entered the correct order number",
+    "ordersNotFoundDesc": "Please make sure you entered the correct phone number",
     "orderDetails": "Order Details",
     "orderStatus": "Order Status",
     "orderDate": "Order Date",
@@ -285,7 +291,10 @@
     "loading": "Loading...",
     "error": "Error occurred",
     "tryAgain": "Try Again",
-    "backToHome": "Back to Home"
+    "backToHome": "Back to Home",
+    "yourOrders": "Your Orders",
+    "viewOrder": "View Order",
+    "noOrdersFound": "No orders found for this number"
   },
   "branches": {
     "title": "Our Branches",

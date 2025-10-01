@@ -329,3 +329,48 @@ export async function updatePaymentStatus(
     return { success: false, error: "حدث خطأ غير متوقع" };
   }
 }
+
+// البحث عن الطلبات برقم الهاتف
+export async function getOrdersByPhone(
+  phoneNumber: string
+): Promise<{ orders: Order[] | null; error: string | null }> {
+  try {
+    // التحقق من صحة رقم الهاتف
+    if (!phoneNumber || phoneNumber.trim().length === 0) {
+      return { orders: null, error: "رقم الهاتف مطلوب" };
+    }
+
+    // تنظيف رقم الهاتف من المسافات والرموز
+    const cleanPhone = phoneNumber.replace(/\s+/g, "").replace(/[^\d+]/g, "");
+
+    const { data: orders, error } = await supabase
+      .from("orders")
+      .select(
+        `
+        *,
+        order_items (
+          *,
+          products (
+            id,
+            title,
+            price,
+            images
+          )
+        ),
+        payments (*)
+      `
+      )
+      .eq("customer_phone", cleanPhone)
+      .order("created_at", { ascending: false });
+
+    if (error) {
+      console.error("Error fetching orders by phone:", error);
+      return { orders: null, error: "حدث خطأ في البحث عن الطلبات" };
+    }
+
+    return { orders: orders || [], error: null };
+  } catch (error) {
+    console.error("Unexpected error fetching orders by phone:", error);
+    return { orders: null, error: "حدث خطأ غير متوقع" };
+  }
+}

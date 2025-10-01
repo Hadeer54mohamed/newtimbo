@@ -31,7 +31,9 @@ export function formatWhatsAppMessage(orderDetails: OrderDetails): string {
   const productSummary = orderDetails.items
     .map(
       (item) =>
-        `• ${item.quantity} × ${item.productName} - ${item.price.toFixed(2)} EGP`
+        `• ${item.quantity} × ${item.productName} - ${item.price.toFixed(
+          2
+        )} EGP`
     )
     .join("\n");
 
@@ -99,7 +101,7 @@ export function formatPhoneNumber(phoneNumber: string): string {
  */
 export function getWhatsAppNotificationNumber(): string {
   const envNumber = process.env.WHATSAPP_NOTIFICATION_NUMBER;
-  const defaultNumber = "201065223412";
+  const defaultNumber = ""; //قم بتعريف رقم الواتساب هنا
 
   if (envNumber) {
     return formatPhoneNumber(envNumber);
@@ -194,9 +196,10 @@ export function sendWhatsAppNotification(
   const whatsappUrl = generateWhatsAppUrl(message);
 
   // Check if mobile device
-  const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
-    navigator.userAgent
-  ) || window.innerWidth <= 768;
+  const isMobile =
+    /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+      navigator.userAgent
+    ) || window.innerWidth <= 768;
 
   // Show confirmation dialog before opening WhatsApp
   const confirmationText =
@@ -209,7 +212,7 @@ export function sendWhatsAppNotification(
   if (shouldOpen) {
     if (isMobile) {
       // For mobile, try to open WhatsApp app directly
-      const mobileUrl = whatsappUrl.replace('wa.me', 'api.whatsapp.com');
+      const mobileUrl = whatsappUrl.replace("wa.me", "api.whatsapp.com");
       window.location.href = mobileUrl;
     } else {
       // For desktop, open WhatsApp Web in a new tab
@@ -232,13 +235,14 @@ export function sendWhatsAppNotificationDirect(
   const whatsappUrl = generateWhatsAppUrl(message);
 
   // Check if mobile device
-  const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
-    navigator.userAgent
-  ) || window.innerWidth <= 768;
+  const isMobile =
+    /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+      navigator.userAgent
+    ) || window.innerWidth <= 768;
 
   if (isMobile) {
     // For mobile, try to open WhatsApp app directly
-    const mobileUrl = whatsappUrl.replace('wa.me', 'api.whatsapp.com');
+    const mobileUrl = whatsappUrl.replace("wa.me", "api.whatsapp.com");
     window.location.href = mobileUrl;
   } else {
     // For desktop, open WhatsApp Web in a new tab directly

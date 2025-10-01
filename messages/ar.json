@@ -244,17 +244,23 @@
     "getInOn": "احصل عليه من",
     "googlePlay": "جوجل بلاي",
     "allRightsReserved": "كل لحظة أسهل",
-    "ENSLink":"تم التطوير بواسطة",
+    "ENSLink": "تم التطوير بواسطة",
     "weAccept": "نحن نقبل:",
-       "note": "© {year}. كل لحظة أسهل - تم التطوير بواسطة <developer>ENS</developer>"
+    "note": "© {year}. كل لحظة أسهل - تم التطوير بواسطة <developer>ENS</developer>"
   },
   "orderTracking": {
     "title": "تتبع الطلب",
-    "enterOrderNumber": "أدخل رقم الطلب",
+    "enterOrderNumber": "أدخل رقم الطلب أو رقم الهاتف",
     "orderNumber": "رقم الطلب",
+    "phoneNumber": "رقم الهاتف",
     "trackOrder": "تتبع الطلب",
+    "searchByOrderId": "البحث برقم الطلب",
+    "searchByPhone": "البحث برقم الهاتف",
+    "selectSearchMethod": "اختر طريقة البحث",
     "orderNotFound": "لم يتم العثور على الطلب",
+    "ordersNotFound": "لم يتم العثور على طلبات",
     "orderNotFoundDesc": "تأكد من إدخال رقم الطلب الصحيح",
+    "ordersNotFoundDesc": "تأكد من إدخال رقم الهاتف الصحيح",
     "orderDetails": "تفاصيل الطلب",
     "orderStatus": "حالة الطلب",
     "orderDate": "تاريخ الطلب",
@@ -285,7 +291,10 @@
     "loading": "جاري التحميل...",
     "error": "حدث خطأ",
     "tryAgain": "حاول مرة أخرى",
-    "backToHome": "العودة للرئيسية"
+    "backToHome": "العودة للرئيسية",
+    "yourOrders": "طلباتك",
+    "viewOrder": "عرض الطلب",
+    "noOrdersFound": "لا توجد طلبات لهذا الرقم"
   },
   "branches": {
     "title": "فروعنا",
