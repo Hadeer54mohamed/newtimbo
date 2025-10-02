@@ -48,7 +48,7 @@ const VideoSection = () => {
       </motion.div>
     </div>
   </section> */
-  <section className="w-full pt-16 sm:pt-20 lg:pt-24">
+  <section className="w-full sm:pt-18 lg:pt-24">
     <div className="relative w-full h-auto">
       <video
         src="/herozz.mp4"
